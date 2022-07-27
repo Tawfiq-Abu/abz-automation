@@ -1,0 +1,792 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>ABZ AUTOMATIONS</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  {% comment %} Favicons {% endcomment %}
+  <link href="{% static 'website/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'website/img/apple-touch-icon.png' }" rel="apple-touch-icon">
+
+  {% comment %} Google Fonts {% endcomment %}
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  {% comment %} Vendor CSS Files {% endcomment %}
+  <link href="{% static 'website/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'website/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+  <link href="{% static 'website/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'website/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+  <link href="{% static 'website/vendor/venobox/venobox.css' %}" rel="stylesheet">
+  <link href="{% static 'website/vendor/aos/aos.css' %}" rel="stylesheet">
+
+  {% comment %} Template Main CSS File {% endcomment %}
+  <link href="{% static 'website/css/style.css' %}" rel="stylesheet">
+  
+
+  
+</head>
+
+<body>
+
+  {% comment %} ======= Top Bar ======= {% endcomment %}
+  <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top">
+    <div class="container d-flex">
+      <div class="contact-info me-auto">
+        <i class="icofont-envelope"></i> <a href="info@abzautomations.com">info@abzautomations.com</a>
+        <i class="icofont-phone"></i> +233 50 159 1370
+      </div>
+      <div class="social-links">
+        <a href="https://twitter.com/abz_automations" class="twitter"><i class="icofont-twitter"></i></a>
+        <a href="https://web.facebook.com/1Abzautomations" target="_blank" rel="noopener noreferrer" class="facebook"><i class="icofont-facebook"></i></a>
+        <a href="https://www.instagram.com/abz_automations/" target="_blank" rel="noopener noreferrer" class="instagram"><i class="icofont-instagram"></i></a>
+        <a href="https://www.youtube.com/channel/UClOn2TaH7U78kf0NlVFLRZg" target="_blank" rel="noopener noreferrer" class="youtube"><i class="icofont-youtube"></i></a>
+        <a href="https://Wa.me/+233501591370" target="_blank" rel="noopener noreferrer"class="whatsapp"><i class="icofont-whatsapp"></i></i></a>
+        <a  href="https://www.linkedin.com/company/19127501/" target="_blank" rel="noopener noreferrer" class="linkedin"><i class="icofont-linkedin"></i></i></a>
+      </div>
+    </div>
+  </div>
+
+  {% comment %} ======= Header ======= {% endcomment %}
+  <header id="header" class="fixed-top">
+    <div class="d-flex align-items-center justify-content-lg-between mx-4">
+        <a href="{% url "website:home" %}" class="logo-img"><img src="{% static 'website/img/logo.jpeg' %}" alt="logo"></a>
+
+        <h1 class="logo-text"><a href="{% url "website:home" %}">ABZ AUTOMATIONS</a></h1>
+
+
+      <nav class="nav-menu d-none d-lg-block">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#recents">Projects</a></li>
+          <li><a href="#team">Team</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#contact">Contact</a></li>
+
+        </ul>
+      </nav>{% comment %} .nav-menu {% endcomment %}
+    </div>
+  </header>{% comment %} End Header {% endcomment %}
+
+ {% comment %} ======= Intro Section ======= {% endcomment %}
+  <section id="intro" class="clearfix">
+    <div class="container" data-aos="fade-up">
+
+      <div class="intro-img" data-aos="zoom-out" data-aos-delay="200">
+      <div class="owl-carousel portfolio-details-carousel">
+            <img src="{% static 'website/img/slide_new.jpg' %}" class="img-fluid" alt="">
+            <img src="{% static 'website/img/slide_new1.jpg' %}" class="img-fluid" alt="">
+            <img src="{% static 'website/img/slide2.jpg' %}" class="img-fluid" alt="">
+            <img src="{% static 'website/img/slide_new3.jpg' %}" class="img-fluid" alt="">
+            <img src="{% static 'website/img/slide_new5.jpg' %}" class="img-fluid" alt="">
+            <img src="{% static 'website/img/slide_new2.jpg' %}" class="img-fluid" alt="">
+          </div>
+      </div>
+
+      <div class="intro-info" data-aos="zoom-in" data-aos-delay="100">
+        <h2>Welcome to ABZ AUTOMATIONS</h2>
+        <h2>Automate and get smarter</h2>
+        <div class="d-flex">
+          <a href="{% url "website:order" %}" class="btn-get-started scrollto">Order Now</a>
+         
+        </div>
+      </div>
+
+    </div>
+  </section>{% comment %} End Intro Section {% endcomment %}
+
+  <main id="main">
+
+    
+    {% comment %} ======= About Section ======= {% endcomment %}
+    <section id="about" class="about section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>About</h2>
+          <h3>Find Out More <span>About Us</span></h3>
+          
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100">
+            <img src="{% static 'website/img/abt.jpg' %}" class="img-fluid" alt="">
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0 content d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="100">
+            
+            <p class="font-italic">
+              Abz Automations, a start-up business in Ghana, is dedicated to providing durable, affordable and
+                excellent quality automation systems to the residents of Ghana and beyond, in a manner that
+                generates superior values to our customers. We specialize in designing and production of a
+                variety of automation products for individuals, small businesses and industries. We are a business 
+                that eliminates manual repetitive tasks through the development of hardware and software solutions. 
+                
+            </p>
+            
+            
+          </div>
+        </div>
+
+      </div>
+    </section>{% comment %} End About Section {% endcomment %}
+
+    
+   
+
+   
+    <section id="counts" class="counts">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6">
+            <div class="count-box">
+              <i class="icofont-simple-smile"></i>
+              <span data-toggle="counter-up">87</span>
+              <p>Happy Clients</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mt-5 mt-md-0">
+            <div class="count-box">
+              <i class="icofont-document-folder"></i>
+              <span data-toggle="counter-up">92</span>
+              <p>Projects</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
+            <div class="count-box">
+              <i class="icofont-live-support"></i>
+              <span data-toggle="counter-up">14000</span>
+              <p>Hours Of Support</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
+            <div class="count-box">
+              <i class="icofont-users-alt-5"></i>
+              <span data-toggle="counter-up">10</span>
+              <p>Hard Workers</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>{% comment %} End Counts Section {% endcomment %}
+
+   
+
+    {% comment %} ======= Services Section ======= {% endcomment %}
+    <section id="services" class="services">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Services</h2>
+          <h3>Check our <span>Services</span></h3>
+          <p>Abz Automations is dedicated to providing durable, affordable and excellent quality automation products to the residents of Ghana and beyond, in a manner that generates superior values to our customers. </p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon-box">
+              <div class="icon"><i class="icofont-automation"></i></div>
+              <h4><a href="">Automatic water pump controller</a></h4>
+              <p>Prevent your tank from low level situation and overflow</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+            <div class="icon-box">
+              <div class="icon"><i class="icofont-gear-alt"></i></i></div>
+              <h4><a href="">Pump dry run protection system</a></h4>
+              <p>Protect your pump from running when water level in your well is critical</p>
+            </div>
+          </div>
+
+          {% comment %}<div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">{% endcomment %}
+          {% comment %}  <div class="icon-box">{% endcomment %}
+          {% comment %}    <div class="icon"><i class="icofont-smart-phone"></i></i></div>{% endcomment %}
+          {% comment %}    <h4><a href="">Smart water tank system</a></h4>{% endcomment %}
+          {% comment %}    <p>Know your water level anywhere you are at the click of a button</p>{% endcomment %}
+          {% comment %}  </div>{% endcomment %}
+          {% comment %}</div>{% endcomment %}
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon-box">
+              <div class="icon"><i class="icofont-repair"></i></div>
+              <h4><a href="">Smart plumbing system</a></h4>
+              <p>Install cost effective plumbing system with smart features</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="200">
+            <div class="icon-box">
+              <div class="icon"><i class="icofont-micro-chip"></i></i></div>
+              <h4><a href="">Programmable pump control feature</a></h4>
+              <p>Set the number of minutes or hours you want your pump to run</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="icofont-jar"></i></div>
+              <h4><a href="">Smart PolyTank installation</a></h4>
+              <p>Efficient tank installation which eliminates the need for pressure boosters</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>{% comment %} End Services Section {% endcomment %}
+
+{% comment %} ======= Products Section ======= {% endcomment %}
+<section id="products" class="about section-bg">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-title">
+      <h2>Products</h2>
+      <h3>Find Out More <span>Products</span></h3>
+      
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100"> 
+
+        
+
+
+     
+        <img src="{% static 'website/img/product_3.png' %}" class="img-fluid" alt="">
+      </div>
+      <div class="col-lg-6 pt-4 pt-lg-0 content d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="100">
+        
+        <p class="font-italic">
+          Our flagship product
+         is AutoX, an automatic water pump controller and water management system. This is an automatic device designed to control the operation of an
+        electric water pump for household, business and industrial use. When your water level gets below a
+        predetermined level it switches on your pump automatically and when the tank is full it switches off
+        the pump before the water overflows. It also has an added future which displays your water level
+        and pump status at all times. This helps you to save water, electricity and money.
+        </p>
+    
+       
+        
+        
+      </div>
+    </div>
+
+  </div>
+</section>{% comment %} End Products Section {% endcomment %}
+
+
+
+    {% comment %} ======= Recent Works Section ======= {% endcomment %}
+    <section id="recents" class="portfolio">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Recent Works</h2>
+          <h3>Check our <span>Recent Works</span></h3>
+          <p></p>
+        </div>
+
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+         
+        </div>
+
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+          <div class="col-lg-6 col-md-6 portfolio-item filter-app">
+            <a href="{% static 'website/img/recent_new1.jpg' %}" data-gall="portfolioGallery" class="venobox preview-link gallery-img-container" title="Recent Work 1" data-maxwidth="80vw">
+              <img src="{% static 'website/img/recent_new1.jpg' %}" class="img-fluid" alt="">
+            </a>
+          </div>
+          <div class="col-lg-6 col-md-6 portfolio-item filter-app">
+            <a href="{% static 'website/img/recent_new2.jpg' %}" data-gall="portfolioGallery" class="venobox preview-link gallery-img-container" title="Recent Work 1" data-maxwidth="80vw">
+              <img src="{% static 'website/img/recent_new2.jpg' %}" class="img-fluid" alt="">
+            </a>
+          </div>
+          <div class="col-lg-6 col-md-6 portfolio-item filter-app">
+            <a href="{% static 'website/img/recent_new3.jpg' %}" data-gall="portfolioGallery" class="venobox preview-link gallery-img-container" title="Recent Work 1" data-maxwidth="80vw">
+              <img src="{% static 'website/img/recent_new3.jpg' %}" class="img-fluid" alt="">
+            </a>
+          </div>
+          <div class="col-lg-6 col-md-6 portfolio-item filter-app">
+            <a href="{% static 'website/img/recent_new4.jpg' %}" data-gall="portfolioGallery" class="venobox preview-link gallery-img-container" title="Recent Work 1" data-maxwidth="80vw">
+              <img src="{% static 'website/img/recent_new4.jpg' %}" class="img-fluid" alt="">
+            </a>
+          </div>
+        </div>
+        
+        {% comment %} <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+
+          <div class="col-lg-6 col-md-6 portfolio-item filter-app">
+            <img src="{% static 'website/img/recent_new1.jpg' %}" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              
+              <a href="{% static 'website/img/recent_new1.jpg' %}" data-gall="portfolioGallery" class="venobox preview-link" title="Recent Work 1"></a>
+
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-md-6 portfolio-item filter-web">
+            <img src="{% static 'website/img/recent_new2.jpg' %}" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              
+              <a href="{% static 'website/img/recent_new2.jpg' %}" data-gall="portfolioGallery" class="venobox preview-link" title="Recent Work 2"><i class="bx bx-plus"></i></a>
+              
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-md-6 portfolio-item filter-app">
+            <img src="{% static 'website/img/recent_new3.jpg' %}" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              
+              <a href="{% static 'website/img/recent_new3.jpg' %}" data-gall="portfolioGallery" class="venobox preview-link" title="Recent Work 3"><i class="bx bx-plus"></i></a>
+              
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-md-6 portfolio-item filter-card">
+            <img src="{% static 'website/img/recent_new4.jpg' %}" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              
+              <a href="{% static 'website/img/recent_new4.jpg' %}" data-gall="portfolioGallery" class="venobox preview-link" title="Recent Work 4"><i class="bx bx-plus"></i></a>
+              
+            </div>
+          </div>
+
+         
+
+          
+          
+
+         
+
+        </div> {% endcomment %}
+
+      </div>
+    </section>{% comment %} End Recents Works Section {% endcomment %}
+
+    {% comment %} ======= Team Section ======= {% endcomment %}
+    <section id="team" class="team section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Team</h2>
+          <h3>Our Hardworking <span>Team</span></h3>
+          <p></p>
+        </div>
+
+        <div class="row">
+        
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+            <div class="member">
+              <div class="member-img">
+                <img src="{% static 'website/img/team/team.jpg' %}" class="img-fluid" alt="">
+                {% comment %}<div class="social">
+                  <a href=""><i class="icofont-twitter"></i></a>
+                  <a href=""><i class="icofont-facebook"></i></a>
+                  <a href=""><i class="icofont-instagram"></i></a>
+                  <a href=""><i class="icofont-linkedin"></i></a>
+                </div>{% endcomment %}
+              </div>
+              <div class="member-info">
+                <h4>Abdullah Mohammed Zainudeen</h4>
+                <span>Chief Executive Officer(CEO)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+            <div class="member">
+              <div class="member-img">
+                <img src="{% static 'website/img/team/team2.jpg' %}" class="img-fluid" alt="">
+               {% comment %} <div class="social">
+                  <a href=""><i class="icofont-twitter"></i></a>
+                  <a href=""><i class="icofont-facebook"></i></a>
+                  <a href=""><i class="icofont-instagram"></i></a>
+                  <a href=""><i class="icofont-linkedin"></i></a>
+                </div>{% endcomment %}
+              </div>
+              <div class="member-info">
+                <h4>Rayanu Ubaidu</h4>
+                <span>Chief Financial Officer</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
+            <div class="member">
+              <div class="member-img">
+                <img src="{% static 'website/img/team/Dara.png' %}" class="img-fluid" alt="">
+                {% comment %}<div class="social">
+                  <a href=""><i class="icofont-twitter"></i></a>
+                  <a href=""><i class="icofont-facebook"></i></a>
+                  <a href=""><i class="icofont-instagram"></i></a>
+                  <a href=""><i class="icofont-linkedin"></i></a>
+                </div>{% endcomment %}
+              </div>
+              <div class="member-info">
+                <h4>Yakubu Bunyaminu</h4>
+                <span>Chief Technology Officer(CTO)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
+            <div class="member">
+              <div class="member-img">
+                <img src="{% static 'website/img/team/team4.jpg' %}" class="img-fluid" alt="">
+                {% comment %}<div class="social">
+                  <a href=""><i class="icofont-twitter"></i></a>
+                  <a href=""><i class="icofont-facebook"></i></a>
+                  <a href=""><i class="icofont-instagram"></i></a>
+                  <a href=""><i class="icofont-linkedin"></i></a>
+                </div>{% endcomment %}
+              </div>
+              <div class="member-info">
+                <h4>Abdul Baaki Mohammed Hardi</h4>
+                <span>Chief Operations Officer</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>{% comment %} End Team Section {% endcomment %}
+
+    {% comment %} ======= Pricing Section ======= {% endcomment %}
+    <section id="pricing" class="pricing">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Pricing</h2>
+          <h3>Check our <span>Pricing</span></h3>
+          We have versions of AutoX depending on our customers' needs. All pricing are for clients with single phase-single pump-single tank configuration. Customers with different configuration can <a href="#contact" class="member-info">contact</a> us to get a quote.
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="box featured">
+              <h3>MODEL WLC 210</h3>
+              <h4>GH¢650<span></span></h4>
+              <ul>
+                <li>Overflow prevention.</li>
+                <li>Automatic tank refill.</li>
+                <li>Pump status display.</li>
+                <li>Water level display.</li>
+                <li>Resettable pump running time.</li>
+                <li>Resettable pump waiting time.</li>
+                <li>Automatic and manual modes.</li>
+                <li class="na">Pump dry run protection.</li>
+               <br>
+               <br>
+                
+              </ul>
+              <div class="btn-wrap">
+                <a href="{% url "website:order" %}" class="btn-buy">Order Now</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="200">
+            <div class="box featured">
+              <h3>MODEL WLC 210P</h3>
+              <h4>GH¢750<span></span></h4>
+              <ul>
+               <li>Overflow prevention.</li>
+                <li>Automatic tank refill.</li>
+                <li>Pump status display.</li>
+                <li>Water level display.</li>
+                <li>Resettable pump running time.</li>
+                <li>Resettable pump waiting time.</li>
+                <li>Automatic and manual modes.</li>
+                <li>Dry run protection</li>
+                <li class="na">Wireless communication.</li>
+              </ul>
+              <div class="btn-wrap">
+                <a href="{% url "website:order" %}" class="btn-buy">Order Now</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="300">
+            <div class="box featured">
+              <h3>MODEL WCL 210S</h3>
+              <h4>GH¢750<span></span></h4>
+              <ul>
+               <li>Overflow prevention.</li>
+                <li>Automatic tank refill.</li>
+                <li>Pump status display.</li>
+                <li>Water level display.</li>
+                <li>Resettable pump running time.</li>
+                <li>Resettable pump waiting time.</li>
+                <li>Automatic and manual modes.</li>
+                <li>Wireless communication.</li>
+                <li class="na">Dry run protection</li>
+
+                
+              </ul>
+              <div class="btn-wrap">
+                <a href="{% url "website:order" %}" class="btn-buy">Order Now</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="400">
+            <div class="box featured">
+              
+              <h3>MODEL WCL 210X</h3>
+              <h4>GH¢850<span></span></h4>
+              <ul>
+                <li>Overflow prevention.</li>
+                <li>Automatic tank refill.</li>
+                <li>Pump status display.</li>
+                <li>Water level display.</li>
+                <li>Resettable pump running time.</li>
+                <li>Resettable pump waiting time.</li>
+                <li>Automatic and manual modes.</li>
+                <li>Wireless communication.</li>
+                <li>Dry run protection</li>
+                
+              </ul>
+              <div class="btn-wrap">
+                <a href="{% url "website:order" %}" class="btn-buy">Order Now</a>
+              </div>
+            </div>
+          </div>
+
+         
+
+
+          
+
+         
+
+
+
+
+
+
+        </div>
+
+      </div>
+    </section>{% comment %} End Pricing Section {% endcomment %}
+
+   
+    {% comment %} ======= Contact Section ======= {% endcomment %}
+    <section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Contact</h2>
+          <h3><span>Contact Us</span></h3>
+          <p>For more enquires, contact +233 50 159 1370 / +233 54 610 1305 or fill the form below.</p>
+        </div>
+
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-6">
+            <div class="info-box mb-4">
+              <i class="bx bx-map"></i>
+              <h3>Our Address</h3>
+              <p>K. N. U. S. T, <br>
+                Kumasi Business Incubator, Kumasi.<br>
+                Ghana <br>
+                AK-315-2929<br><br></p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="info-box  mb-4">
+              <i class="bx bx-envelope"></i>
+              <h3>Email Us</h3>
+              <p>info@abzautomations.com</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="info-box  mb-4">
+              <i class="bx bx-phone-call"></i>
+              <h3>Call Us</h3>
+              <p>+233 50 159 1370/ +233 54 610 1305</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+
+          <div class="col-lg-6 ">
+            <iframe class="mb-4 mb-lg-0" src="https://maps.google.com/maps?q=Pankrono%20Estate,%20kumasi%20Near%20true%20vine%20hospital&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
+          </div>
+
+          <div class="col-lg-6">
+            <form action="forms/sendEmail.php" method="post" role="form" class="php-email-form">
+              <div class="row">
+                <div class="col form-group">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                  
+                </div>
+                <div class="col form-group">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                 
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                
+              </div>
+              <div class="form-group">
+                <textarea class="form-control" id="body" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                
+              </div>
+              
+              <div class="text-center"><button type="submit" onclick="sendEmail()" value="Send An Email" name="send">Send Message</button></div>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section>{% comment %} End Contact Section {% endcomment %}
+
+  </main>{% comment %} End #main {% endcomment %}
+
+  {% comment %} ======= Footer ======= {% endcomment %}
+  <footer id="footer">
+
+    
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6 footer-contact">
+            <h3>ABZ AUTOMATIONS<span>.</span></h3>
+            <p>K. N. U. S. T, <br>
+                Kumasi Business Incubator, Kumasi.<br>
+                Ghana <br>
+                AK-315-2929<br><br></p>
+              <strong>Phone:</strong> +233 50 159 1370<br>
+              <strong>Email:</strong> info@abzautomations.com<br>
+            </p>
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url "website:home" %}">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#products">Products</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#pricing">Pricing</a></li>
+            </ul>
+          </div>
+
+          
+
+          <div class="col-lg-4 col-md-6 footer-links">
+            <h4>Our Social Networks</h4>
+            <p>Follow Us On Our Social Media Pages</p>
+            <div class="social-links mt-3">
+              <a href="https://twitter.com/abz_automations" target="_blank" rel="noopener noreferrer" class="twitter"><i class="bx bxl-twitter"></i></a>
+              <a href="https://web.facebook.com/1Abzautomations" target="_blank" rel="noopener noreferrer" class="facebook"><i class="bx bxl-facebook"></i></a>
+              <a href="https://www.instagram.com/abz_automations/" target="_blank" class="instagram"><i class="bx bxl-instagram"></i></a>
+              <a href="https://www.youtube.com/channel/UClOn2TaH7U78kf0NlVFLRZg" target="_blank" rel="noopener noreferrer" class="google-plus"><i class="bx bxl-youtube"></i></a>
+              <a href="https://www.linkedin.com/company/19127501/" target="_blank" rel="noopener noreferrer" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+              <a href="https://Wa.me/+233501591370" target="_blank" rel="noopener noreferrer" class="whatsapp"><i class="bx bxl-whatsapp"></i></a>
+            </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container py-4">
+      <div class="copyright">
+        &copy; Copyright <strong><span>ABZ AUTOMATIONS</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+       
+      </div>
+    </div>
+  </footer>{% comment %} End Footer {% endcomment %}
+
+  <a href="{% url "website:order" %}" class="btn btn-primary rounded-pill fw-bold btn-order-show-bottom">Order Now</a>
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+  <script type="text/javascript">
+        function sendEmail() {
+            var name = $("#name");
+            var email = $("#email");
+            var subject = $("#subject");
+            var body = $("#body");
+
+            if (isNotEmpty(name) && isNotEmpty(email) && isNotEmpty(subject) && isNotEmpty(body)) {
+                $.ajax({
+                   url: 'sendEmail.php',
+                   method: 'POST',
+                   dataType: 'json',
+                   data: {
+                       name: name.val(),
+                       email: email.val(),
+                       subject: subject.val(),
+                       body: body.val()
+                   }, success: function (response) {
+                        if (response.status == "success")
+                            alert('Email Has Been Sent! Thanks for contacting ABZ AUTOMATIONS, you will hear from us soon.');
+                        else {
+                            alert('Please Try Again!');
+                            console.log(response);
+                        }
+                   }
+                });
+            }<div class="mapouter"><div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=Pankrono%20Estate,%20kumasi%20Near%20true%20vine%20hospital&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://fmovies2.org"></a><br><style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}</style><a href="https://google-map-generator.com">html embed google maps</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style></div></div>
+        }
+
+        function isNotEmpty(caller) {
+            if (caller.val() == "") {
+                caller.css('border', '1px solid red');
+                return false;
+            } else
+                caller.css('border', '');
+
+            return true;
+        }
+  </script>
+
+
+
+  {% comment %} Vendor JS Files {% endcomment %}
+  <script src="{% static 'website/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'website/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'website/vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+  <script src="{% static 'website/vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'website/vendor/waypoints/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'website/vendor/counterup/counterup.min.js' %}"></script>
+  <script src="{% static 'website/vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'website/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'website/vendor/venobox/venobox.min.js' %}"></script>
+  <script src="{% static 'website/vendor/aos/aos.js' %}"></script>
+
+  {% comment %} Template Main JS File {% endcomment %}
+  <script src="{% static 'website/js/main.js' %}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,321 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Order - ABZ AUTOMATIONS</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'website/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'website/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'website/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'website/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+  <link href="{% static 'website/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'website/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+  <link href="{% static 'website/vendor/venobox/venobox.css' %}" rel="stylesheet">
+  <link href="{% static 'website/vendor/aos/aos.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'website/css/style.css' %}" rel="stylesheet">
+
+  
+</head>
+
+<body>
+
+   <!-- ======= Top Bar ======= -->
+   <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top">
+    <div class="container d-flex">
+      <div class="contact-info me-auto">
+        <i class="icofont-envelope"></i> <a href="abzautomations@gmail.com">abzautomations@gmail.com</a>
+        <i class="icofont-phone"></i> +233 50 159 1370
+      </div>
+      <div class="social-links">
+        <a href="https://twitter.com/abz_automations" class="twitter"><i class="icofont-twitter"></i></a>
+        <a href="https://web.facebook.com/1Abzautomations" target="_blank" rel="noopener noreferrer" class="facebook"><i class="icofont-facebook"></i></a>
+        <a href="https://www.instagram.com/abz_automations/" target="_blank" rel="noopener noreferrer" class="instagram"><i class="icofont-instagram"></i></a>
+        <a href="https://www.youtube.com/channel/UClOn2TaH7U78kf0NlVFLRZg" target="_blank" rel="noopener noreferrer" class="youtube"><i class="icofont-youtube"></i></a>
+        <a href="https://Wa.me/+233501591370" target="_blank" rel="noopener noreferrer"class="whatsapp"><i class="icofont-whatsapp"></i></i></a>
+        <a  href="https://www.linkedin.com/company/19127501/" target="_blank" rel="noopener noreferrer" class="linkedin"><i class="icofont-linkedin"></i></i></a>
+      </div>
+    </div>
+  </div>
+
+   <!-- ======= Header ======= -->
+   <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+      <a href="{% url "website:home" %}" class="logo-img"><img src="{% static 'website/img/logo.jpeg' %}" alt="logo"></a>
+      <h1 class="logo me-auto"><a href="{% url 'website:home' %}">ABZ AUTOMATIONS</a></h1>
+      
+      
+
+      <nav class="nav-menu d-none d-lg-block">
+        <ul>
+          {% comment %} <li class="active"><a href="{% url 'website:home' %}">Home</a></li> {% endcomment %}
+          <li><a href="{% url 'website:home' %}#about">About</a></li>
+          <li><a href="{% url 'website:home' %}#services">Services</a></li>
+          <li><a href="{% url 'website:home' %}#products">Products</a></li>
+          <li><a href="{% url 'website:home' %}#recents">Projects</a></li>
+          <li><a href="{% url 'website:home' %}#pricing">Pricing</a></li>
+          <li><a href="{% url 'website:home' %}#team">Team</a></li>
+          <li><a href="{% url 'website:home' %}#contact">Contact</a></li>
+
+        </ul>
+      </nav><!-- .nav-menu -->
+
+    </div>
+  </header><!-- End Header -->
+
+
+  <main id="main" data-aos="fade-up">
+
+    <!-- ======= Breadcrumbs Section ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Place Order</h2>
+          <ol>
+            <li><a href="{% url 'website:home' %}">Home</a></li>
+            <li><a href="{% url 'website:order' %}">Order</a></li>
+            <li>Place Order</li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- Breadcrumbs Section -->
+
+    <!-- ======= Order Details Section ======= -->
+    <section id="contact" class="contact" >
+      <div class="container" data-aos="fade-up">
+      <div class="col-lg-8">
+        <form action="send{% url 'website:order' %}" method="post" role="form" class="php-email-form" enctype="multipart/form-data">
+        <div class="row">
+                <div class="col form-group">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" /> 
+                </div>
+                <div class="col form-group">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                  
+                </div>
+              </div>
+
+            
+              <div class="row">
+                <div class="col form-group">
+                  <input type="text" name="location" class="form-control" id="location" placeholder="Location" data-rule="minlen:" data-msg="Please enter your location" />
+                  
+                </div>
+                <div class="col form-group">
+                  <input type="number" class="form-control" name="phone" id="phone" placeholder="Phone" data-rule="minlen:4" data-msg="Please enter a valid phone number" />
+                  
+                </div>
+              </div>
+              
+
+             <div class="row">
+              <div class="col form-group">
+                <label for="model">Select preffered model</label>
+                    <select class="form-control" id="model">
+                       <option></option>
+                       <option>MODEL WLC 210</option>
+                       <option>MODEL WLC 210P</option>
+                       <option>MODEL WLC 210S</option>
+                       <option>MODEL WLC 210X</option>
+                       
+                    </select>
+              </div>
+              <div class="col form-group">
+                  <label for="image">Upload picture of tank</label>
+                 <input type="file" class="form-control form-control-file" name="image" id="image">
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col form-group">
+                  <input type="number" name="tank" class="form-control" id="tank" placeholder="Number of Tanks" data-rule="minlen:4" data-msg="Please enter at least 4 chars" /> 
+                </div>
+                <div class="col form-group">
+                  <input type="number" class="form-control" name="pump" id="pump" placeholder="Number of Pumps" data-rule="email" data-msg="Please enter a valid email" />
+                  
+                </div>
+              </div>
+
+           
+              <div class="form-group">
+                <textarea class="form-control" name="message" id="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                
+              </div>
+              
+
+              <div class="text-center"><button type="submit" onclick="sendOrder()" value="Send An Email" name="send" >Order</button></div>
+              
+
+              
+
+
+
+        </form>
+
+
+       </div> 
+
+       
+
+        
+      </div>
+
+      
+    </section><!-- End Order Details Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6 footer-contact">
+            <h3>ABZ AUTOMATIONS<span>.</span></h3>
+            <p>K. N. U. S. T, <br>
+                Kumasi Business Incubator, Kumasi.<br>
+                Ghana <br>
+                AK-315-2929<br><br></p>
+              <strong>Phone:</strong> +233 50 159 1370<br>
+              <strong>Email:</strong> abzautomations@gmail.com<br>
+            </p>
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'website:home' %}">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'website:home' %}#about">About us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'website:home' %}#services">Services</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'website:home' %}#products">Products</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'website:home' %}#pricing">Pricing</a></li>
+            </ul>
+          </div>
+
+          
+
+          <div class="col-lg-4 col-md-6 footer-links">
+            <h4>Our Social Networks</h4>
+            <p>Follow Us On Our Social Media Pages</p>
+            <div class="social-links mt-3">
+              <a href="https://twitter.com/abz_automations" target="_blank" rel="noopener noreferrer" class="twitter"><i class="bx bxl-twitter"></i></a>
+              <a href="https://web.facebook.com/1Abzautomations" target="_blank" rel="noopener noreferrer" class="facebook"><i class="bx bxl-facebook"></i></a>
+              <a href="https://www.instagram.com/abz_automations/" target="_blank" class="instagram"><i class="bx bxl-instagram"></i></a>
+              <a href="https://www.youtube.com/channel/UClOn2TaH7U78kf0NlVFLRZg" target="_blank" rel="noopener noreferrer" class="google-plus"><i class="bx bxl-youtube"></i></a>
+              <a href="https://www.linkedin.com/company/19127501/" target="_blank" rel="noopener noreferrer" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+              <a href="https://Wa.me/+233501591370" target="_blank" rel="noopener noreferrer" class="whatsapp"><i class="bx bxl-whatsapp"></i></a>
+            </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container py-4">
+      <div class="copyright">
+        &copy; Copyright <strong><span>ABZ AUTOMATIONS</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+       
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+
+  
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+
+
+  <script type="text/javascript">
+        function sendOrder() {
+            var name = $("#name");
+            var email = $("#email");
+            var location = $("#location");
+            var phone = $("#phone");
+            var model = $("#model");
+            var image = $("#image");
+            var tank = $("#tank");
+            var pump = $("#pump");
+            var message = $("#message");
+
+            if (isNotEmpty(name) && isNotEmpty(email) && isNotEmpty(location) && isNotEmpty(phone) && isNotEmpty(model) && isNotEmpty(tank) && isNotEmpty(pump) && isNotEmpty(message)) {
+                $.ajax({
+                   url: 'send{% url 'website:order' %}',
+                   method: 'POST',
+                   dataType: 'json',
+                   data: {
+                       name: name.val(),
+                       email: email.val(),
+                       location: location.val(),
+                       phone: phone.val(),
+                       model: model.val(),
+                       image: image.val(),
+                       tank: tank.val(),
+                       pump: pump.val(),
+                       message: message.val()
+                   }, success: function (response) {
+                        if (response.status == "success")
+                            alert('Email Has Been Sent! Thanks for contacting ABZ AUTOMATIONS, you will hear from us soon.');
+                        else {
+                            alert('Please Try Again!');
+                            console.log(response);
+                        }
+                   }
+                });
+            }
+        }
+
+        function isNotEmpty(caller) {
+            if (caller.val() == "") {
+                caller.css('border', '1px solid red');
+                return false;
+            } else
+                caller.css('border', '');
+
+            return true;
+        }
+    </script>
+
+
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'website/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'website/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'website/vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+  <script src="{% static 'website/vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'website/vendor/waypoints/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'website/vendor/counterup/counterup.min.js' %}"></script>
+  <script src="{% static 'website/vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'website/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'website/vendor/venobox/venobox.min.js' %}"></script>
+  <script src="{% static 'website/vendor/aos/aos.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'website/js/main.js' %}"></script>
+
+</body>
+
+</html>
