@@ -11,5 +11,11 @@ DECIMAL_PLACES = 3
 ####### END DATABASE CONSTANTS ########
 
 # ############## CHOICE CONSTANTS ##############
-
+ICON_CHOICES = [
+    ("icofont-simple-smile", "smiley-face"),
+    ("icofont-document-folder", "document-folder"),
+    ("icofont-live-support", "live-support",),
+    ("icofont-users-alt-5", "users"),
+    ("icofont-water-drop", "water-drop"),
+]
 # ############## END CHOICE CONSTANTS ##############

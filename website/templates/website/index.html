@@ -146,39 +146,16 @@
       <div class="container" data-aos="fade-up">
 
         <div class="row">
-
+        {% comment %} list of Metrics {% endcomment %}
+        {% for metric in metrics %}
           <div class="col-lg-3 col-md-6">
             <div class="count-box">
-              <i class="icofont-simple-smile"></i>
-              <span data-toggle="counter-up">87</span>
-              <p>Happy Clients</p>
+              <i class="{{metric.icon}}"></i>
+              <span data-toggle="counter-up">{{metric.count}}</span>
+              <p>{{metric.name}}</p>
             </div>
           </div>
-
-          <div class="col-lg-3 col-md-6 mt-5 mt-md-0">
-            <div class="count-box">
-              <i class="icofont-document-folder"></i>
-              <span data-toggle="counter-up">92</span>
-              <p>Projects</p>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
-            <div class="count-box">
-              <i class="icofont-live-support"></i>
-              <span data-toggle="counter-up">14000</span>
-              <p>Hours Of Support</p>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
-            <div class="count-box">
-              <i class="icofont-users-alt-5"></i>
-              <span data-toggle="counter-up">10</span>
-              <p>Hard Workers</p>
-            </div>
-          </div>
-
+        {% endfor %}
         </div>
 
       </div>
@@ -390,77 +367,30 @@
 
         <div class="row">
         
+          {% for member in team_member_list %}
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="member">
               <div class="member-img">
-                <img src="{% static 'website/img/team/team.jpg' %}" class="img-fluid" alt="">
+                <img src="{{member.image.url}}" class="img-fluid" alt="">
                 {% comment %}<div class="social">
-                  <a href=""><i class="icofont-twitter"></i></a>
                   <a href=""><i class="icofont-facebook"></i></a>
-                  <a href=""><i class="icofont-instagram"></i></a>
-                  <a href=""><i class="icofont-linkedin"></i></a>
                 </div>{% endcomment %}
               </div>
               <div class="member-info">
-                <h4>Abdullah Mohammed Zainudeen</h4>
-                <span>Chief Executive Officer(CEO)</span>
+                <h4>{{member.first_name}} {{member.last_name}} {{member.other_name}}</h4>
+                <span>{{member.role}}</span>
+                <a href="mailto:{{member.email}}"><i class="icofont-envelope icofont-2x"></i></a>
+                <a href="{{member.linked_in}}"><i class="icofont-linkedin icofont-2x"></i></a>
               </div>
             </div>
           </div>
+          
+          
+          
+          
+          
+          {% endfor %}
 
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-            <div class="member">
-              <div class="member-img">
-                <img src="{% static 'website/img/team/team2.jpg' %}" class="img-fluid" alt="">
-               {% comment %} <div class="social">
-                  <a href=""><i class="icofont-twitter"></i></a>
-                  <a href=""><i class="icofont-facebook"></i></a>
-                  <a href=""><i class="icofont-instagram"></i></a>
-                  <a href=""><i class="icofont-linkedin"></i></a>
-                </div>{% endcomment %}
-              </div>
-              <div class="member-info">
-                <h4>Rayanu Ubaidu</h4>
-                <span>Chief Financial Officer</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
-            <div class="member">
-              <div class="member-img">
-                <img src="{% static 'website/img/team/Dara.png' %}" class="img-fluid" alt="">
-                {% comment %}<div class="social">
-                  <a href=""><i class="icofont-twitter"></i></a>
-                  <a href=""><i class="icofont-facebook"></i></a>
-                  <a href=""><i class="icofont-instagram"></i></a>
-                  <a href=""><i class="icofont-linkedin"></i></a>
-                </div>{% endcomment %}
-              </div>
-              <div class="member-info">
-                <h4>Yakubu Bunyaminu</h4>
-                <span>Chief Technology Officer(CTO)</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
-            <div class="member">
-              <div class="member-img">
-                <img src="{% static 'website/img/team/team4.jpg' %}" class="img-fluid" alt="">
-                {% comment %}<div class="social">
-                  <a href=""><i class="icofont-twitter"></i></a>
-                  <a href=""><i class="icofont-facebook"></i></a>
-                  <a href=""><i class="icofont-instagram"></i></a>
-                  <a href=""><i class="icofont-linkedin"></i></a>
-                </div>{% endcomment %}
-              </div>
-              <div class="member-info">
-                <h4>Abdul Baaki Mohammed Hardi</h4>
-                <span>Chief Operations Officer</span>
-              </div>
-            </div>
-          </div>
 
         </div>
 
@@ -630,7 +560,7 @@
         <div class="row" data-aos="fade-up" data-aos-delay="100">
 
           <div class="col-lg-6 ">
-            <iframe class="mb-4 mb-lg-0" src="https://maps.google.com/maps?q=Pankrono%20Estate,%20kumasi%20Near%20true%20vine%20hospital&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
+            {% comment %} <iframe class="mb-4 mb-lg-0" src="https://maps.google.com/maps?q=Pankrono%20Estate,%20kumasi%20Near%20true%20vine%20hospital&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe> {% endcomment %}
           </div>
 
           <div class="col-lg-6">
@@ -756,7 +686,8 @@
                         }
                    }
                 });
-            }<div class="mapouter"><div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=Pankrono%20Estate,%20kumasi%20Near%20true%20vine%20hospital&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://fmovies2.org"></a><br><style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}</style><a href="https://google-map-generator.com">html embed google maps</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style></div></div>
+            }
+            <div class="mapouter"><div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=Pankrono%20Estate,%20kumasi%20Near%20true%20vine%20hospital&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://fmovies2.org"></a><br><style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}</style><a href="https://google-map-generator.com">html embed google maps</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style></div></div>
         }
 
         function isNotEmpty(caller) {
