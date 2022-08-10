@@ -10,7 +10,7 @@ def icon_image_directory(instance, filename):
 
 class TeamMember(models.Model):
     first_name = models.CharField(max_length=SHORT_STR_LEN)
-    other_name = models.CharField(max_length=SHORT_STR_LEN,null=True)
+    other_names = models.CharField(max_length=SHORT_STR_LEN, null=True, blank=True)
     last_name = models.CharField(max_length=SHORT_STR_LEN)
     role = models.CharField(max_length=SHORT_STR_LEN)
     image = models.ImageField(upload_to=icon_image_directory)
