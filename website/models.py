@@ -1,4 +1,6 @@
 import email
+from itertools import product
+from pyexpat import model
 from django.db import models
 from utils.constants import TINY_STR_LEN,SHORT_STR_LEN,LONG_STR_LEN
 # Create your models here.
@@ -32,3 +34,31 @@ class Metric(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Product(models.Model):
+    name = models.CharField(max_length=SHORT_STR_LEN)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+
+
+    def __str__(self):
+        return self.name
+
+
+class ProductFeature(models.Model):
+    product = models.ForeignKey(Product,on_delete=models.CASCADE)
+    description = models.CharField(max_length=LONG_STR_LEN)
+    
+
+class Service(models.Model):
+    name = models.CharField(max_length=SHORT_STR_LEN)
+    description = models.CharField(max_length=LONG_STR_LEN)
+    icon = models.CharField(max_length=SHORT_STR_LEN, choices=ICON_CHOICES, default="icofont-water-drop")
+
+
+    def __str__(self):
+        return self.name
+
+
+
+
