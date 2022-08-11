@@ -45,7 +45,7 @@ class Product(models.Model):
         return self.name
 
 
-class Feature(models.Model):
+class ProductFeature(models.Model):
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
     description = models.CharField(max_length=LONG_STR_LEN)
     

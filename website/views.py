@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from django.views.generic import TemplateView, ListView
 
-from .models import Metric, TeamMember,Product,Feature,Service
+from .models import Metric, TeamMember,Product,ProductFeature,Service
 # Create your views here.
 
 class HomeView(ListView):
