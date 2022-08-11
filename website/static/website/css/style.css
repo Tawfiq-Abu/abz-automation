@@ -1278,7 +1278,7 @@ div.team-member {
 }
 
 div.team-member:hover {
-  background-color: #062b5b;
+  background-color: #0b5ed7;
   color: white;
 }
 
@@ -1303,10 +1303,6 @@ div.team-member .team-member-details p:first-child {
   font-size: 1.2em;
   font-weight: 600;
   letter-spacing: .05em;
-}
-
-div.team-member .team-member-details p:nth-child(2) {
-  color: grey;
 }
 
 div.team-member .team-member-links{
