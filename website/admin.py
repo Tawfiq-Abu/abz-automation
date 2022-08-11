@@ -10,9 +10,13 @@ from .models import Metric,ProductFeature,Product,Service
 
 admin.site.register(TeamMember)
 admin.site.register(Metric)
-admin.site.register(Product)
-admin.site.register(ProductFeature)
+# admin.site.register(ProductFeature)
 admin.site.register(Service)
 
+class ProductFeatureInline(admin.TabularInline):
+    model = ProductFeature
 
+class ProductAdmin(admin.ModelAdmin):
+    inlines = [ProductFeatureInline]
+admin.site.register(Product,ProductAdmin)
 
