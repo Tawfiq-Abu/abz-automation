@@ -589,7 +589,8 @@
           </div>
 
           <div class="col-lg-6">
-            <form action="forms/sendEmail.php" method="post" role="form" class="php-email-form">
+            <form action="{% url 'website:getformdata' %}" method="post" role="form" class="php-email-form">
+              {% csrf_token %}
               <div class="row">
                 <div class="col form-group">
                   <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
@@ -610,7 +611,7 @@
                 
               </div>
               
-              <div class="text-center"><button type="submit" onclick="sendEmail()" value="Send An Email" name="send">Send Message</button></div>
+              <div class="text-center"><button type="submit"  value="Send An Email" name="send">Send Message</button></div>
             </form>
           </div>
 
