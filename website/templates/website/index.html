@@ -17,6 +17,12 @@
 
   {% comment %} Google Fonts {% endcomment %}
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    
+  {% comment %} font awesome {% endcomment %}
+  <script src="https://kit.fontawesome.com/546832c0ab.js" crossorigin="anonymous"></script>
+
+  {% comment %} font awesome {% endcomment %}
+  <script src="https://kit.fontawesome.com/546832c0ab.js" crossorigin="anonymous"></script>
 
   {% comment %} Vendor CSS Files {% endcomment %}
   <link href="{% static 'website/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -365,29 +371,48 @@
           <p></p>
         </div>
 
-        <div class="row">
-        
+        <div class="team-member-container">
           {% for member in team_member_list %}
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-            <div class="member">
+          <div class="team-member" data-aos="fade-up" data-aos-delay="100">
+            <div class="team-member-img-container">
+                <img src="{{ member.image.url }}" alt="jaycee">
+            </div>
+            <div class="team-member-details">
+                <p class="team-member-name">{{ member.first_name }} {{ member.other_names|default_if_none:"" }} {{ member.last_name }}</p>
+                <p class="team-member-role">{{ member.role }}</p>
+            </div>
+            <div class="team-member-links">
+                <a href="{{ member.linked_in }}" target="_blank" class="social-link-icon">
+                    <i class="fa-brands fa-linkedin"></i>                   
+                </a>
+                {% comment %} <a href="" class="social-link-icon">
+                    <i class="fa-brands fa-instagram"></i>                     
+                </a> {% endcomment %}
+                <a href="mailto:{{ member.email }}" class="social-link-icon">
+                    <i class="fa-regular fa-envelope"></i>                     
+                </a>
+            </div>
+        </div>
+          
+          <!-- <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+            <div class="member p-3 d-flex flex-column justify-content-around align-items-center">
+              
               <div class="member-img">
                 <img src="{{member.image.url}}" class="img-fluid" alt="">
-                {% comment %}<div class="social">
-                  <a href=""><i class="icofont-facebook"></i></a>
-                </div>{% endcomment %}
               </div>
+              
               <div class="member-info">
-                <h4>{{member.first_name}} {{member.last_name}} {{member.other_name}}</h4>
+                <h4>{{member.first_name}} {{member.last_name}} {{member.other_names}}</h4>
+                
                 <span>{{member.role}}</span>
-                <a href="mailto:{{member.email}}"><i class="icofont-envelope icofont-2x"></i></a>
-                <a href="{{member.linked_in}}"><i class="icofont-linkedin icofont-2x"></i></a>
+                
+                <div class="d-flex gap-3">
+                  <a href="mailto:{{member.email}}" class=""><i class="icofont-envelope icofont-2x"></i></a>
+                  <a href="{{member.linked_in}}" class=""><i class="icofont-linkedin icofont-2x"></i></a>
+                </div>
               </div>
             </div>
-          </div>
-          
-          
-          
-          
+          </div> -->
           
           {% endfor %}
 
@@ -687,6 +712,7 @@
                    }
                 });
             }
+            
             <div class="mapouter"><div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=Pankrono%20Estate,%20kumasi%20Near%20true%20vine%20hospital&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://fmovies2.org"></a><br><style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}</style><a href="https://google-map-generator.com">html embed google maps</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style></div></div>
         }
 
