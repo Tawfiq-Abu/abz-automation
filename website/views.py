@@ -1,9 +1,8 @@
-import email
 from django.shortcuts import render,redirect
 
 from django.views.generic import TemplateView, ListView
 from django.contrib.auth import get_user_model
-
+from django.conf import settings
 
 
 from utils.mailing import Util as MailUtil
@@ -31,11 +30,10 @@ class HomeView(ListView):
 
 
 
-
 def getformdata(request):
     data = request.POST
     email_body = data['name'] + ' '+ 'response email' + ' '+ data['email'] + ' ' + data['message']
-    data = {'email_body': email_body, 'to_email': user.email,
+    data = {'email_body': email_body, 'to_email': settings.EMAIL_HOST_USER,
                 'email_subject': data['subject']}
     MailUtil.send_email(data)
     print(data)
