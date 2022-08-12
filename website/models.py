@@ -39,7 +39,7 @@ class Product(models.Model):
         return self.name
 
 class ProductModel(models.Model):
-    product = models.ForeignKey(Product,on_delete=models.CASCADE)
+    product = models.ForeignKey(Product,on_delete=models.CASCADE, related_name="product_models")
     name = models.CharField(max_length=SHORT_STR_LEN)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     available = models.BooleanField(default=True)
@@ -48,7 +48,7 @@ class ProductModel(models.Model):
         return f"{self.product} - {self.name}"
 
 class ProductModelFeature(models.Model):
-    product_model = models.ForeignKey(ProductModel, on_delete=models.CASCADE)
+    product_model = models.ForeignKey(ProductModel, on_delete=models.CASCADE, related_name="product_model_features")
     description = models.CharField(max_length=LONG_STR_LEN)
 
     def __str__(self):
