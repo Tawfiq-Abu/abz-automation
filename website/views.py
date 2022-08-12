@@ -32,7 +32,7 @@ class HomeView(ListView):
 
 def getformdata(request):
     data = request.POST
-    email_body = data['name'] + ' '+ 'response email' + ' '+ data['email'] + ' ' + data['message']
+    email_body = data['name'] + ' '+ 'response email' + ' '+ data['email'] + '\n' + data['message']
     data = {'email_body': email_body, 'to_email': settings.EMAIL_HOST_USER,
                 'email_subject': data['subject']}
     MailUtil.send_email(data)
