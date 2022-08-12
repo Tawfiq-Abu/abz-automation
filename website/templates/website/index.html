@@ -74,7 +74,7 @@
           {% comment %} <li><a href="#products">Products</a></li> {% endcomment %}
           <li><a href="#recents">Projects</a></li>
           <li><a href="#team">Team</a></li>
-          <li><a href="#pricing">Pricing</a></li>
+          {% comment %} <li><a href="#pricing">Pricing</a></li> {% endcomment %}
           <li><a href="#contact">Contact</a></li>
 
         </ul>
@@ -224,62 +224,8 @@
         
         </div>
         {% endfor %}
-          {% comment %} <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon-box d-flex flex-column justify-content-around gap-3">
-              <div class="icon"><i class="icofont-automation"></i></div>
-              <h4><a href="">Automatic water pump controller</a></h4>
-              <p>Prevent your tank from low level situation and overflow</p>
-              <a href="#" class="btn btn-primary fw-bold">Order</a>
-            </div> {% endcomment %}
-          {% comment %} </div> {% endcomment %}
 
-          {% comment %} <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box  d-flex flex-column justify-content-around gap-3">
-              <div class="icon"><i class="icofont-gear-alt"></i></i></div>
-              <h4><a href="">Pump dry run protection system</a></h4>
-              <p>Protect your pump from running when water level in your well is critical</p>
-              <a href="#" class="btn btn-primary fw-bold">Order</a>
-            </div>
-          </div> {% endcomment %}
-
-          {% comment %}<div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">{% endcomment %}
-          {% comment %}  <div class="icon-box  d-flex flex-column justify-content-around gap-3">{% endcomment %}
-          {% comment %}    <div class="icon"><i class="icofont-smart-phone"></i></i></div>{% endcomment %}
-          {% comment %}    <h4><a href="">Smart water tank system</a></h4>{% endcomment %}
-          {% comment %}    <p>Know your water level anywhere you are at the click of a button</p>{% endcomment %}
-          {% comment %}  </div>{% endcomment %}
-          {% comment %}</div>{% endcomment %}
-
-          {% comment %} <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon-box  d-flex flex-column justify-content-around gap-3">
-              <div class="icon"><i class="icofont-repair"></i></div>
-              <h4><a href="">Smart plumbing system</a></h4>
-              <p>Install cost effective plumbing system with smart features</p>
-              <a href="#" class="btn btn-primary fw-bold">Order</a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box  d-flex flex-column justify-content-around gap-3">
-              <div class="icon"><i class="icofont-micro-chip"></i></i></div>
-              <h4><a href="">Programmable pump control feature</a></h4>
-              <p>Set the number of minutes or hours you want your pump to run</p>
-              <a href="#" class="btn btn-primary fw-bold">Order</a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon-box  d-flex flex-column justify-content-around gap-3">
-              <div class="icon"><i class="icofont-jar"></i></div>
-              <h4><a href="">Smart PolyTank installation</a></h4>
-              <p>Efficient tank installation which eliminates the need for pressure boosters</p>
-              <a href="#" class="btn btn-primary fw-bold">Order</a>
-            </div>
-          </div> {% endcomment %}
-
-        {% comment %} </div> {% endcomment %}
-
-        <h3 class="text-primary mt-4">Services</h3>
+        <h3 class="text-primary mt-4 pt-4">Services</h3>
         <div class="row">
         {% for service in service_list %}
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
@@ -309,10 +255,6 @@
     <div class="row">
       <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100"> 
 
-        
-
-
-     
         <img src="{% static 'website/img/product_3.png' %}" class="img-fluid" alt="">
       </div>
       <div class="col-lg-6 pt-4 pt-lg-0 content d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="100">
@@ -486,7 +428,7 @@
     </section>{% comment %} End Team Section {% endcomment %}
 
     {% comment %} ======= Pricing Section ======= {% endcomment %}
-    <section id="pricing" class="pricing">
+    {% comment %} <section id="pricing" class="pricing">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -602,7 +544,8 @@
         </div>
 
       </div>
-    </section>{% comment %} End Pricing Section {% endcomment %}
+    </section> {% endcomment %}
+    {% comment %} End Pricing Section {% endcomment %}
 
    
     {% comment %} ======= Contact Section ======= {% endcomment %}
@@ -709,7 +652,7 @@
             <ul>
               <li><i class="bx bx-chevron-right"></i> <a href="{% url "website:home" %}">Home</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#products">Products</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#pricing">Pricing</a></li>
+              {% comment %} <li><i class="bx bx-chevron-right"></i> <a href="#pricing">Pricing</a></li> {% endcomment %}
             </ul>
           </div>
 
