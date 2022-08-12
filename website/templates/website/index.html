@@ -220,7 +220,12 @@
                       <li class="product-model-feature-item my-1">{{ feature }}</li>
                     {% endfor %}
                     </ul>
+
+                    {% if product_model.available  %}
                     <a href="#" class="btn btn-primary fw-bold">Order</a>
+                    {% else %}
+                    <button href="#" class="btn btn-primary fw-bold" disabled>Out of stock</button>
+                    {% endif %}
                 </div>
               </div>
             {% empty %}
