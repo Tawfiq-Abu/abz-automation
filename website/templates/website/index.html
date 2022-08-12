@@ -181,23 +181,29 @@
         
         <h3 class="text-primary mt-4">Products</h3>
         {% for product in product_list %}
-        <div class="row">
+        <div class="row gap-4">
           {% comment %} Product {% endcomment %}
           <div class="row col-lg-4 align-self-start">
-            <div class="col-lg-10 col-md-10 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+            <div class="col-lg-10 col-md-8 d-flex align-items-stretch mb-4" data-aos="zoom-in" data-aos-delay="100">
                 <div class="icon-box d-flex flex-column justify-content-around gap-3">
                     <div class="icon"><i class="icofont-automation"></i></div>
                     <h4><a>{{ product.name }}</a></h4>
                     <p>{{ product.description }}</p>
                 </div>
             </div>
-          
-            <div class="col-lg-2 col-md-2 d-flex flex-column justify-content-center align-items-center">
+
+            {% comment %} model arrow for desktop screens + {% endcomment %}
+            <div class="col-lg-2 col-md-4 d-none d-lg-flex flex-column justify-content-center align-items-center">
               <p>Models</p>
               <i class="icofont-arrow-right icofont-2x text-primary"></i>
             </div>
-          </div>
 
+            {% comment %} model arrow for mobile screens {% endcomment %}
+            <div class="col-lg-2 col-md-4 d-lg-none d-flex flex-column justify-content-center align-items-center">
+              <p>Models</p>
+              <i class="icofont-arrow-down icofont-2x text-primary"></i>
+            </div>
+          </div>
 
             {% comment %} Product Models {% endcomment %}
             <div class="row col-lg-8 flex-grow-1 align-items-stretch">
@@ -398,26 +404,6 @@
                 </a>
             </div>
         </div>
-          
-          <!-- <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-            <div class="member p-3 d-flex flex-column justify-content-around align-items-center">
-              
-              <div class="member-img">
-                <img src="{{member.image.url}}" class="img-fluid" alt="">
-              </div>
-              
-              <div class="member-info">
-                <h4>{{member.first_name}} {{member.last_name}} {{member.other_names}}</h4>
-                
-                <span>{{member.role}}</span>
-                
-                <div class="d-flex gap-3">
-                  <a href="mailto:{{member.email}}" class=""><i class="icofont-envelope icofont-2x"></i></a>
-                  <a href="{{member.linked_in}}" class=""><i class="icofont-linkedin icofont-2x"></i></a>
-                </div>
-              </div>
-            </div>
-          </div> -->
           
           {% endfor %}
 
