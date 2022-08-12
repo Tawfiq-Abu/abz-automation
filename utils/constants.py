@@ -16,6 +16,8 @@ ICON_CHOICES = [
     ("icofont-document-folder", "document-folder"),
     ("icofont-live-support", "live-support",),
     ("icofont-users-alt-5", "users"),
-    ("icofont-water-drop", "water-drop"),
+    ("icofont-water-drop", "single water drop"),
+    ("icofont-energy-water", "energy"),
+    ("fa fa-faucet-drip", "drop of water from tap"),
 ]
 # ############## END CHOICE CONSTANTS ##############
