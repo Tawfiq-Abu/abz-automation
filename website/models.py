@@ -1,6 +1,7 @@
 import email
 from itertools import product
 from pyexpat import model
+from statistics import mode
 from django.db import models
 from utils.constants import TINY_STR_LEN,SHORT_STR_LEN,LONG_STR_LEN
 
@@ -78,7 +79,23 @@ class ServiceRequest(models.Model):
     total_amount = models.DecimalField(max_digits=6, decimal_places=2)
     service = models.ForeignKey(Service,on_delete=models.CASCADE)
     basket = models.ForeignKey(Basket,on_delete=models.CASCADE)
-    
+
+
+    def __str__(self):
+        return self.service.name
+
+class ProductOrder(models.Model):
+    product = models.ForeignKey(Product,on_delete=models.CASCADE)
+    product_model = models.ForeignKey(ProductFeature,on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+    unit_price = models.DecimalField(max_digits=6, decimal_places=2)
+    total_amount = models.DecimalField(max_digits=6, decimal_places=2)
+
+
+
+
+
+
         
         
         

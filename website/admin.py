@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import TeamMember
 
-from .models import Metric,ProductFeature,Product,Service,Basket
+from .models import Metric,ProductFeature,Product,Service,Basket,ServiceRequest
 
 # Register your models here.
 # class TeamMemberAdmin(admin.ModelAdmin):
@@ -20,4 +20,5 @@ class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductFeatureInline]
 admin.site.register(Product,ProductAdmin)
 admin.site.register(Basket)
+# admin.site.register(ServiceRequest)
 
