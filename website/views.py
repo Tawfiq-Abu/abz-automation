@@ -10,7 +10,7 @@ from utils.mailing import Util as MailUtil
 
 
 
-from .models import Metric, TeamMember,Product,ProductFeature,Service
+from .models import Metric, TeamMember, Product, Service
 # Create your views here.
 user = get_user_model()
 
