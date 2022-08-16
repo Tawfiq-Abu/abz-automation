@@ -71,3 +71,16 @@ class Basket(models.Model):
     location = PlainLocationField(based_fields=['city'], zoom=7)
     customer_phone_number = models.CharField(max_length=SHORT_STR_LEN)
 
+    def __str__(self):
+        return self.customer_name
+
+class ServiceRequest(models.Model):
+    total_amount = models.DecimalField(max_digits=6, decimal_places=2)
+    service = models.ForeignKey(Service,on_delete=models.CASCADE)
+    basket = models.ForeignKey(Basket,on_delete=models.CASCADE)
+    
+        
+        
+        
+        
+
