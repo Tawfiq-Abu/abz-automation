@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import email
 from itertools import product
 from pyexpat import model
@@ -6,6 +7,11 @@ from django.db import models
 from utils.constants import TINY_STR_LEN,SHORT_STR_LEN,LONG_STR_LEN
 
 from location_field.models.plain import PlainLocationField
+=======
+from django.db import models
+from utils.constants import TINY_STR_LEN, SHORT_STR_LEN, LONG_STR_LEN, ICON_CHOICES
+
+>>>>>>> development
 
 # Create your models here.
 
@@ -27,10 +33,6 @@ class TeamMember(models.Model):
     def __str__(self):
         return self.first_name
 
-from utils.constants import TINY_STR_LEN, SHORT_STR_LEN, ICON_CHOICES
-
-# Create your models here.
-
 class Metric(models.Model):
     name = models.CharField(max_length=SHORT_STR_LEN)
     count = models.IntegerField()
@@ -42,17 +44,27 @@ class Metric(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=SHORT_STR_LEN)
-    price = models.DecimalField(max_digits=6, decimal_places=2)
-
+    description = models.TextField()
 
     def __str__(self):
         return self.name
 
+class ProductModel(models.Model):
+    product = models.ForeignKey(Product,on_delete=models.CASCADE, related_name="product_models")
+    name = models.CharField(max_length=SHORT_STR_LEN)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    available = models.BooleanField(default=True)
 
-class ProductFeature(models.Model):
-    product = models.ForeignKey(Product,on_delete=models.CASCADE)
+    def __str__(self):
+        return f"{self.product} - {self.name}"
+
+class ProductModelFeature(models.Model):
+    product_model = models.ForeignKey(ProductModel, on_delete=models.CASCADE, related_name="product_model_features")
     description = models.CharField(max_length=LONG_STR_LEN)
-    
+
+    def __str__(self):
+        return self.description
+
 
 class Service(models.Model):
     name = models.CharField(max_length=SHORT_STR_LEN)
@@ -86,7 +98,7 @@ class ServiceRequest(models.Model):
 
 class ProductOrder(models.Model):
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
-    product_model = models.ForeignKey(ProductFeature,on_delete=models.CASCADE)
+    product_model = models.ForeignKey(ProductModel,on_delete=models.CASCADE)
     quantity = models.IntegerField()
     unit_price = models.DecimalField(max_digits=6, decimal_places=2)
     total_amount = models.DecimalField(max_digits=6, decimal_places=2)

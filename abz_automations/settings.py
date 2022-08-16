@@ -134,6 +134,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+<<<<<<< HEAD
 # Email configuration
 # EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 # EMAIL_HOST = "smtp.gmail.com"
@@ -149,3 +150,12 @@ LOCATION_FIELD = {
     'provider.google.api_libraries': '',
     'provider.google.map.type': 'ROADMAP',
 }
+=======
+# Emailing
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.yourserver.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = ('EMAIL_HOST_PASSWORD')
+# EMAIL_USE_TLS = True
+>>>>>>> development
