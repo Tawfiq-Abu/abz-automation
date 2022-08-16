@@ -68,7 +68,7 @@ class ProductModelFeature(models.Model):
 
 class Service(models.Model):
     name = models.CharField(max_length=SHORT_STR_LEN)
-    description = models.CharField(max_length=LONG_STR_LEN)
+    description = models.CharField(max_length=LONG_STR_LEN,null=True)
     icon = models.CharField(max_length=SHORT_STR_LEN, choices=ICON_CHOICES, default="icofont-water-drop")
 
 
