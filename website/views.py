@@ -1,9 +1,18 @@
-from django.shortcuts import render
+import email
+from django.shortcuts import render,redirect
 
 from django.views.generic import TemplateView, ListView
+from django.contrib.auth import get_user_model
+
+
+
+from utils.mailing import Util as MailUtil
+
+
 
 from .models import Metric, TeamMember, Product, Service
 # Create your views here.
+user = get_user_model()
 
 class HomeView(ListView):
     model = Metric
@@ -22,6 +31,15 @@ class HomeView(ListView):
 
 
 
+
+def getformdata(request):
+    data = request.POST
+    email_body = data['name'] + ' '+ 'response email' + ' '+ data['email'] + ' ' + data['message']
+    data = {'email_body': email_body, 'to_email': user.email,
+                'email_subject': data['subject']}
+    MailUtil.send_email(data)
+    print(data)
+    return redirect('https://www.google.com')
 
 
 class OrderView(TemplateView):
