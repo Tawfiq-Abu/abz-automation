@@ -1,4 +1,6 @@
+
 import email
+
 from django.shortcuts import render,redirect
 
 from django.views.generic import TemplateView, ListView
@@ -31,6 +33,14 @@ class HomeView(ListView):
 
 
 
+def getformdata(request):
+    data = request.POST
+    email_body = data['name'] + ' '+ 'response email' + ' '+ data['email'] + '\n' + data['message']
+    data = {'email_body': email_body, 'to_email': settings.EMAIL_HOST_USER,
+                'email_subject': data['subject']}
+    MailUtil.send_email(data)
+    print(data)
+    return redirect('https://www.google.com')
 
 def getformdata(request):
     data = request.POST
