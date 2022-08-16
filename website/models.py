@@ -3,6 +3,9 @@ from itertools import product
 from pyexpat import model
 from django.db import models
 from utils.constants import TINY_STR_LEN,SHORT_STR_LEN,LONG_STR_LEN
+
+from location_field.models.plain import PlainLocationField
+
 # Create your models here.
 
 
@@ -61,4 +64,10 @@ class Service(models.Model):
 
 
 
+class Basket(models.Model):
+    customer_name = models.CharField(max_length=SHORT_STR_LEN)
+    customer_email = models.EmailField()
+    # https://django-location-field.readthedocs.io/en/latest/tutorials.html#using-django-location-field-in-the-django-admin
+    location = PlainLocationField(based_fields=['city'], zoom=7)
+    customer_phone_number = models.CharField(max_length=SHORT_STR_LEN)
 
