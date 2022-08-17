@@ -271,7 +271,7 @@
               <div class="icon"><i class="{{ service.icon }}"></i></div>
               <h4><a href="">{{ service.name }}</a></h4>
               <p>{{ service.description }}</p>
-              <a href="#" class="btn btn-primary fw-bold">Add to Cart</a>
+              <a href="#" class="btn btn-primary fw-bold" id="add-service-to-cart" data-service-id={{ service.pk }}>Add to Cart</a>
             </div>
           </div>
         {% endfor %}
@@ -731,7 +731,27 @@
             }
         });
     })
-        {% comment %} <div class="mapouter"><div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=Pankrono%20Estate,%20kumasi%20Near%20true%20vine%20hospital&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://fmovies2.org"></a><br><style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}</style><a href="https://google-map-generator.com">html embed google maps</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style></div></div> {% endcomment %}
+
+    $(document).on('click','#add-service-to-cart', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url : '{% url "website:cart-add" %}',
+            data:{
+                csrfmiddlewaretoken: '{{csrf_token}}',
+                order_type: "service_request",
+                service_id: $(this).data('service-id'),
+            },
+            success: function(json){
+                document.getElementById('basket-quantity').innerHTML = json.basket_quantity;
+            },
+            error:function(xhr,errmsg,err){
+                console.log(errmsg)
+            }
+        });
+    })
+    
+    {% comment %} <div class="mapouter"><div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=Pankrono%20Estate,%20kumasi%20Near%20true%20vine%20hospital&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://fmovies2.org"></a><br><style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}</style><a href="https://google-map-generator.com">html embed google maps</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style></div></div> {% endcomment %}
 
         function isNotEmpty(caller) {
             if (caller.val() == "") {

@@ -1,6 +1,6 @@
 
 
-from .models import ProductOrder, ServiceRequest
+from .models import ProductOrder, ServiceRequest, Basket as DatabaseBasket
 from decimal import Decimal
 
 
@@ -45,7 +45,7 @@ class Basket():
             if service_request_id not in self.basket["service_requests"]:
                 self.basket["service_requests"][service_request_id] = {
                     'name': service_request.service.name,
-                    'price': service_request.service.price
+                    'price': str(service_request.service.price)
                 }
         self.save()
        
@@ -123,3 +123,7 @@ class Basket():
 
     def save(self):
         self.session.modified = True
+
+    def save_to_db(self):
+        # save session to basket model in DB
+        DatabaseBasket.objects.create()

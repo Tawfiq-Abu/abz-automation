@@ -53,22 +53,14 @@ def add_to_basket(request):
             product_model_id = int(request.POST.get('product_model_id'))
             # create product order and add to basket 
             product_model = ProductModel.objects.get(pk=product_model_id)
-            basket = Basket.objects.create()
-            product_order = ProductOrder.objects.create(
-                product_model=product_model, 
-                basket=basket
-                )
+            product_order = ProductOrder.objects.create(product_model=product_model)
             session_basket.add_prodcut_order(product_order=product_order)
         
         elif order_type == "service_request":
             service_id = int(request.POST.get('service_id'))
-            # create product order and add to basket 
+            # create service request and add to basket 
             service = Service.objects.get(pk=service_id)
-            basket = Basket.objects.create()
-            service_request = ServiceRequest.objects.create(
-                service=service, 
-                basket=basket
-                )
+            service_request = ServiceRequest.objects.create(service=service)
             session_basket.add_service_request(service_request=service_request)
         
         return JsonResponse({"basket_quantity": session_basket.__len__()})

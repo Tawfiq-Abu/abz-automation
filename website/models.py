@@ -91,7 +91,7 @@ class Basket(models.Model):
 class ServiceRequest(models.Model):
     # total_amount = models.DecimalField(max_digits=6, decimal_places=2)
     service = models.ForeignKey(Service,on_delete=models.CASCADE)
-    basket = models.ForeignKey(Basket,on_delete=models.CASCADE)
+    basket = models.ForeignKey(Basket,on_delete=models.CASCADE, null=True, blank=True)
 
 
     def __str__(self):
@@ -99,11 +99,11 @@ class ServiceRequest(models.Model):
 
 class ProductOrder(models.Model):
     # product = models.ForeignKey(Product,on_delete=models.CASCADE)
+    # unit_price = models.DecimalField(max_digits=6, decimal_places=2)
     product_model = models.ForeignKey(ProductModel,on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
-    # unit_price = models.DecimalField(max_digits=6, decimal_places=2)
     total_amount = models.DecimalField(max_digits=6, decimal_places=2)
-    basket = models.ForeignKey(Basket,on_delete=models.CASCADE)
+    basket = models.ForeignKey(Basket,on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.product.name
