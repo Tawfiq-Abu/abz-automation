@@ -1,4 +1,6 @@
 {% load static %}
+{% load basket_length %}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,9 +23,6 @@
   {% comment %} font awesome {% endcomment %}
   <script src="https://kit.fontawesome.com/546832c0ab.js" crossorigin="anonymous"></script>
 
-  {% comment %} font awesome {% endcomment %}
-  <script src="https://kit.fontawesome.com/546832c0ab.js" crossorigin="anonymous"></script>
-
   {% comment %} Vendor CSS Files {% endcomment %}
   <link href="{% static 'website/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
   <link href="{% static 'website/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
@@ -34,7 +33,9 @@
 
   {% comment %} Template Main CSS File {% endcomment %}
   <link href="{% static 'website/css/style.css' %}" rel="stylesheet">
-  
+
+    {% comment %} jquery {% endcomment %}
+  <script src="{% static 'website/vendor/jquery/jquery.min.js' %}"></script>
 
   
 </head>
@@ -59,6 +60,25 @@
     </div>
   </div>
 
+  {% comment %} ======= Cart Modal ======= {% endcomment %}
+<div class="modal fade" id="cart-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Your Cart</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        cart items
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
   {% comment %} ======= Header ======= {% endcomment %}
   <header id="header" class="fixed-top">
     <div class="d-flex align-items-center justify-content-lg-between mx-4">
@@ -76,7 +96,14 @@
           <li><a href="#team">Team</a></li>
           {% comment %} <li><a href="#pricing">Pricing</a></li> {% endcomment %}
           <li><a href="#contact">Contact</a></li>
-
+          <li>
+            <a type="button" data-bs-toggle="modal" data-bs-target="#cart-modal" class="d-flex align-items-center position-relative">
+              <i class="icofont-shopping-cart icofont-2x"></i> 
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary" id="basket-quantity">
+                {{request.session.skey|basket_length}}
+              </span>
+            </a>
+          </li>
         </ul>
       </nav>{% comment %} .nav-menu {% endcomment %}
     </div>
@@ -222,9 +249,9 @@
                     </ul>
 
                     {% if product_model.available  %}
-                    <a href="#" class="btn btn-primary fw-bold">Order</a>
+                    <a class="btn btn-primary fw-bold" id="add-product-model-to-cart" data-product-model-id={{ product_model.pk }}>Add to Cart</a>
                     {% else %}
-                    <button href="#" class="btn btn-primary fw-bold" disabled>Out of stock</button>
+                    <button class="btn btn-primary fw-bold" disabled>Out of stock</button>
                     {% endif %}
                 </div>
               </div>
@@ -244,7 +271,7 @@
               <div class="icon"><i class="{{ service.icon }}"></i></div>
               <h4><a href="">{{ service.name }}</a></h4>
               <p>{{ service.description }}</p>
-              <a href="#" class="btn btn-primary fw-bold">Request Service</a>
+              <a href="#" class="btn btn-primary fw-bold">Add to Cart</a>
             </div>
           </div>
         {% endfor %}
@@ -683,36 +710,28 @@
   <div id="preloader"></div>
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
-  <script type="text/javascript">
-        function sendEmail() {
-            var name = $("#name");
-            var email = $("#email");
-            var subject = $("#subject");
-            var body = $("#body");
+  
 
-            if (isNotEmpty(name) && isNotEmpty(email) && isNotEmpty(subject) && isNotEmpty(body)) {
-                $.ajax({
-                   url: 'sendEmail.php',
-                   method: 'POST',
-                   dataType: 'json',
-                   data: {
-                       name: name.val(),
-                       email: email.val(),
-                       subject: subject.val(),
-                       body: body.val()
-                   }, success: function (response) {
-                        if (response.status == "success")
-                            alert('Email Has Been Sent! Thanks for contacting ABZ AUTOMATIONS, you will hear from us soon.');
-                        else {
-                            alert('Please Try Again!');
-                            console.log(response);
-                        }
-                   }
-                });
+  <script type="text/javascript">
+      $(document).on('click','#add-product-model-to-cart', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url : '{% url "website:cart-add" %}',
+            data:{
+                csrfmiddlewaretoken: '{{csrf_token}}',
+                order_type: "product_order",
+                product_model_id: $(this).data('product-model-id'),
+            },
+            success: function(json){
+                document.getElementById('basket-quantity').innerHTML = json.basket_quantity;
+            },
+            error:function(xhr,errmsg,err){
+                console.log(errmsg)
             }
-            
-            <div class="mapouter"><div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=Pankrono%20Estate,%20kumasi%20Near%20true%20vine%20hospital&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://fmovies2.org"></a><br><style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}</style><a href="https://google-map-generator.com">html embed google maps</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style></div></div>
-        }
+        });
+    })
+        {% comment %} <div class="mapouter"><div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=Pankrono%20Estate,%20kumasi%20Near%20true%20vine%20hospital&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://fmovies2.org"></a><br><style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}</style><a href="https://google-map-generator.com">html embed google maps</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style></div></div> {% endcomment %}
 
         function isNotEmpty(caller) {
             if (caller.val() == "") {
@@ -728,7 +747,6 @@
 
 
   {% comment %} Vendor JS Files {% endcomment %}
-  <script src="{% static 'website/vendor/jquery/jquery.min.js' %}"></script>
   <script src="{% static 'website/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'website/vendor/jquery.easing/jquery.easing.min.js' %}"></script>
   <script src="{% static 'website/vendor/php-email-form/validate.js' %}"></script>
