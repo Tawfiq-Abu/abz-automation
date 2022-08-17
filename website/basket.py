@@ -21,14 +21,15 @@ class Basket():
         self.session = request.session
         self.basket = self.session['skey'] = {}
 
-    def add_prodcut_order(self, product_order):
+    def add_product_model(self, product_model):
         '''
         adding and updating the users basket session product_order
         '''
-        if product_order:
-            product_order_id = str(product_order.id)
-            if product_order_id not in self.basket["product_orders"]:
-                self.basket["product_orders"][product_order_id] = {
+        if product_model:
+            product_model_id = str(product_model.id)
+            if product_model_id not in self.basket["product_orders"]:
+                product_order = ProductOrder.objects.create(product_model=product_model)
+                self.basket["product_orders"][product_model_id] = {
                     'name': str(product_order.product_model),
                     'price': str(product_order.product_model.price),
                     'quantity':product_order.quantity
@@ -36,14 +37,15 @@ class Basket():
          
         self.save()
 
-    def add_service_request(self, service_request):
+    def add_service(self, service):
         '''
-        adding and updating the users basket session service_request
+        adding and updating the users basket session service
         '''
-        if service_request:
-            service_request_id = str(service_request.id)
-            if service_request_id not in self.basket["service_requests"]:
-                self.basket["service_requests"][service_request_id] = {
+        if service:
+            service_id = str(service.id)
+            if service_id not in self.basket["service_requests"]:
+                service_request = ServiceRequest.objects.create(service=service)
+                self.basket["service_requests"][service_id] = {
                     'name': service_request.service.name,
                     'price': str(service_request.service.price)
                 }

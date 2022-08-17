@@ -69,10 +69,16 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        cart items
+        {% for key, value in request.session.skey.product_orders.items %}
+          {{value.name}} - {{ value.price }} <br><br>
+        {%endfor%}
+
+        {% for key, value in request.session.skey.service_requests.items %}
+          {{value.name}} - {{ value.price }} <br><br>
+        {%endfor%}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Clear</button>
         <button type="button" class="btn btn-primary">Confirm</button>
       </div>
     </div>
@@ -726,8 +732,8 @@
             success: function(json){
                 document.getElementById('basket-quantity').innerHTML = json.basket_quantity;
             },
-            error:function(xhr,errmsg,err){
-                console.log(errmsg)
+            error:function(json){
+                alert(json.responseJSON.error)
             }
         });
     })
@@ -745,8 +751,8 @@
             success: function(json){
                 document.getElementById('basket-quantity').innerHTML = json.basket_quantity;
             },
-            error:function(xhr,errmsg,err){
-                console.log(errmsg)
+            error:function(json){
+                alert(json.responseJSON.error)
             }
         });
     })

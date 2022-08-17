@@ -51,17 +51,31 @@ def add_to_basket(request):
 
         if order_type == "product_order":
             product_model_id = int(request.POST.get('product_model_id'))
+
+            # check if product_model is already in basket
+            if str(product_model_id) in session_basket.basket['product_orders']:
+                print("error here")
+                return JsonResponse({"error": "already added"}, status=400)
+
+
             # create product order and add to basket 
             product_model = ProductModel.objects.get(pk=product_model_id)
-            product_order = ProductOrder.objects.create(product_model=product_model)
-            session_basket.add_prodcut_order(product_order=product_order)
+            session_basket.add_product_model(product_model=product_model)
         
         elif order_type == "service_request":
             service_id = int(request.POST.get('service_id'))
+
+            print(str(service_id))
+            print(session_basket.basket['service_requests'])
+            print(str(service_id) in session_basket.basket['service_requests'])
+            # check if service is already in basket
+            if str(service_id) in session_basket.basket['service_requests']:
+                print("error here")
+                return JsonResponse({"error": "already added"}, status=400)
+
             # create service request and add to basket 
             service = Service.objects.get(pk=service_id)
-            service_request = ServiceRequest.objects.create(service=service)
-            session_basket.add_service_request(service_request=service_request)
+            session_basket.add_service(service=service)
         
         return JsonResponse({"basket_quantity": session_basket.__len__()})
 
