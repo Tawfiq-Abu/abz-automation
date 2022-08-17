@@ -82,7 +82,7 @@ class Basket(models.Model):
     customer_name = models.CharField(max_length=SHORT_STR_LEN)
     customer_email = models.EmailField()
     # https://django-location-field.readthedocs.io/en/latest/tutorials.html#using-django-location-field-in-the-django-admin
-    location = PlainLocationField(based_fields=['city'], zoom=7)
+    #! location = PlainLocationField(based_fields=['city'], zoom=7)
     customer_phone_number = models.CharField(max_length=SHORT_STR_LEN)
 
     def __str__(self):
