@@ -104,13 +104,13 @@ class Basket():
         self.save()
     
 
-    def update_product_order(self,product_order_id, quantity):
+    def update_product_order(self,product_model_id, quantity):
         '''
         update product_order values in session data
         '''
-        product_order_id = str(product_order_id)
-        if product_order_id in self.basket["product_orders"]:
-            self.basket["product_orders"][product_order_id]['quantity'] = quantity
+        product_model_id= str(product_model_id)
+        if product_model_id in self.basket["product_orders"]:
+            self.basket["product_orders"][product_model_id]['quantity'] = quantity
         self.save()
 
     def update_service_request(self,service_request_id, quantity):

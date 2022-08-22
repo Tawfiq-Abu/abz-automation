@@ -27,7 +27,6 @@ class HomeView(ListView):
         return context
 
 
-
 def getformdata(request):
     data = request.POST
     email_body = data['name'] + ' '+ 'response email' + ' '+ data['email'] + '\n' + data['message']
@@ -82,9 +81,26 @@ def add_to_basket(request):
 
         
 
-        basket_length = product_order.basket.product_order_set.count() + product_order.basket.service_request_set.count()
+        # basket_length = product_order.basket.product_order_set.count() + product_order.basket.service_request_set.count()
 
-        # return length of basket
-        return JsonResponse({
-            'basket_length': basket_length,
-        })
+        # # return length of basket
+        # return JsonResponse({
+        #     'basket_length': basket_length,
+        # })
+
+def basket_update(request):
+    session_basket = SessionBasket(request)
+    if request.method == 'POST':
+        product_model_id = int(request.POST.get('product_model_id'))
+        product_qty = int(request.POST.get('productqty'))
+        session_basket.update_product_order(product_model_id=product_model_id,quantity=product_qty)
+        print(session_basket.basket['product_orders'])
+        print(product_model_id)
+        print(product_qty)
+        # get the length of the items in the basket
+        basketqty = session_basket.__len__()
+        # basket_total = basket.get_total_price()
+        response = JsonResponse({'qty':basketqty})#'total':basket_total
+        return response
+
+

@@ -71,10 +71,26 @@
       <div class="modal-body">
         {% for key, value in request.session.skey.product_orders.items %}
           {{value.name}} - {{ value.price }} <br><br>
+          <label for="select">Qty</label>
+                <select id="select{{key}}">
+                  <option selected>
+                    {{value.quantity}}
+                  </option>
+                  <option value="">1</option>
+                  <option value="">2</option>
+                  <option value="">3</option>
+                  <option value="">4</option>
+                </select>
+                <button type="button" id="update-button" data-index={{ key }} 
+                  class="btn btn-outline-secondary btn-sm update-button">
+                  Update
+                </button><br><br>
         {%endfor%}
 
         {% for key, value in request.session.skey.service_requests.items %}
           {{value.name}} - {{ value.price }} <br><br>
+          <label for="select">Qty</label>
+                
         {%endfor%}
       </div>
       <div class="modal-footer">
@@ -260,7 +276,7 @@
                     <button class="btn btn-primary fw-bold" disabled>Out of stock</button>
                     {% endif %}
                 </div>
-              </div>
+              </div
             {% empty %}
             No models
             {% endfor %}
@@ -768,6 +784,41 @@
 
             return true;
         }
+
+
+        $(document).on('click','#update-button', function(e){
+          e.preventDefault();
+          var prodid = $(this).data('index')
+          console.log(prodid)
+          $.ajax({
+              type: 'POST',
+              url : '{% url "website:cart-update" %}',
+              data:{
+                product_model_id: prodid,
+                productqty: $('#select' + prodid +' option:selected').text().trim(),
+                csrfmiddlewaretoken: '{{csrf_token}}',
+                action: 'post'
+              },
+              success: function(json){
+                document.getElementById('basket-quantity').innerHTML = json.qty
+                {% comment %} document.getElementById('subtotal').innerHTML = json.total {% endcomment %}
+                console.log(json)
+                console.log(json.basket_quantity)
+              },
+              error:function(xhr,errmsg,err){
+  
+              }
+          
+          });
+      })
+
+
+      
+
+
+
+
+
   </script>
 
 
