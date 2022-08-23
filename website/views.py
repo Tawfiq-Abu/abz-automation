@@ -104,3 +104,12 @@ def basket_update(request):
         return response
 
 
+def basket_delete(request):
+    session_basket = SessionBasket(request)
+    if request.method == 'POST':
+        product_model_id = int(request.POST.get('product_model_id'))
+        session_basket.delete(product_model_id=product_model_id)
+        basketqty =session_basket.__len__()
+        # basket_total = basket.get_total_price()
+        response = JsonResponse({'qty':basketqty})#'total':basket_total})
+        return response

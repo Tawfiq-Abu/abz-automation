@@ -84,6 +84,10 @@
                 <button type="button" id="update-button" data-index={{ key }} 
                   class="btn btn-outline-secondary btn-sm update-button">
                   Update
+                </button>
+                <button type="button" id="delete-button" data-index="{{key}}" 
+                  class="btn btn-outline-secondary btn-sm delete-button">
+                  Delete
                 </button><br><br>
         {%endfor%}
 
@@ -811,6 +815,29 @@
           
           });
       })
+
+
+      $(document).on('click','#delete-button', function(e){
+        e.preventDefault();
+        var prodid = $(this).data('index')
+        $.ajax({
+            type: 'POST',
+            url : '{% url "website:cart-delete" %}',
+            data:{
+                productid: $(this).data('index'),
+                csrfmiddlewaretoken: '{{csrf_token}}',
+                action: 'post'
+            },
+            success: function(json){
+              $('.product-item[data-index="' + prodid + '"]').remove();
+              document.getElementById('subtotal').innerHTML = json.total
+              document.getElementById('basket-qty').innerHTML = json.qty
+            },
+            error:function(xhr,errmsg,err){
+
+            }
+        });
+    })
 
 
       
