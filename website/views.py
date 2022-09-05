@@ -149,3 +149,39 @@ def basket_delete(request):
                 'total':basket_total
                 })
             return response
+
+
+def confirm_basket(request):
+    session_basket = SessionBasket(request)
+    if request.method == 'POST':
+        # creating the basket item
+        customer_name = request.POST.get('customer_name')
+        customer_email = request.POST.get('customer_email')
+        customer_phone_number = request.POST.get('customer_contact')
+        current_basket = Basket.objects.create(
+            customer_name = customer_name,
+            customer_email = customer_email,
+            customer_phone_number = customer_phone_number
+        )
+        current_basket.save()
+
+        for i,v in session_basket.basket['product_orders'].items():
+            product_model = ProductModel.objects.get(id = int(i))
+            quantity = v['quantity']
+            total_amount = v['price']
+            basket = current_basket
+
+        ProductOrder.objects.create(
+            product_model = product_model,
+            quantity = quantity,
+            total_amount = total_amount,
+            basket = basket
+        )
+        ProductOrder.save()
+
+
+
+
+        
+
+
