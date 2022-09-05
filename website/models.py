@@ -86,8 +86,8 @@ class Basket(models.Model):
     customer_phone_number = models.CharField(max_length=SHORT_STR_LEN)
     date_ordered = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return self.customer_name
+    # def __str__(self):
+    #     return self.customer_name
 
 class ServiceRequest(models.Model):
     # total_amount = models.DecimalField(max_digits=6, decimal_places=2)

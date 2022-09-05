@@ -87,7 +87,7 @@
               </div>
             </div>
             
-            <div class="row align-items-center">
+            <div class="row">
               <div class="cart-item-quantity-container col-lg-6">
                 <input type="button" onclick="decrementQuantity(product_model_{{ id }}_quantity)" value="-" />
                 <input class="text-center" id="product_model_{{ id }}_quantity" value="{{product_model.quantity}}" type="text" maxlength="2" size="1">
@@ -97,7 +97,7 @@
               <div class="cart-item-amount col-lg-6 text-end fw-bold">GH&#162; {{ product_model.price }} </div>
               
             <button id="update-button" data-index="{{ id }}" 
-              class="btn btn-outline-secondary btn-sm update-button">
+              class="btn btn-outline-secondary btn-sm update-button ">
               Update
             </button>
             </div>

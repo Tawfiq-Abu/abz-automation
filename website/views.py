@@ -179,11 +179,6 @@ def confirm_basket(request):
             )
             product_order.save()
 
-        
-
-        response = JsonResponse({})
-        return response
-
         for i,v in session_basket.basket['service_requests'].items():
             service = Service.objects.get(id = int(i))
 
@@ -192,6 +187,9 @@ def confirm_basket(request):
                 basket = basket
             )
             service_create.save()
+
+        response = JsonResponse({})
+        return response
 
 
 
