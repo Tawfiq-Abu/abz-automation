@@ -171,13 +171,24 @@ def confirm_basket(request):
             total_amount = v['price']
             basket = current_basket
 
-        ProductOrder.objects.create(
-            product_model = product_model,
-            quantity = quantity,
-            total_amount = total_amount,
-            basket = basket
-        )
-        ProductOrder.save()
+            ProductOrder.objects.create(
+                product_model = product_model,
+                quantity = quantity,
+                total_amount = total_amount,
+                basket = basket
+            )
+            ProductOrder.save()
+
+
+        for i,v in session_basket.basket['service_requests'].items():
+            service = Service.objects.get(id = int(i))
+
+            service_create=ServiceRequest.objects.create(
+                service = service,
+                basket = basket
+            )
+            service_create.save()
+
 
 
 
