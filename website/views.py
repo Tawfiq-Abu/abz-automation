@@ -184,6 +184,17 @@ def confirm_basket(request):
         response = JsonResponse({})
         return response
 
+        for i,v in session_basket.basket['service_requests'].items():
+            service = Service.objects.get(id = int(i))
+
+            service_create=ServiceRequest.objects.create(
+                service = service,
+                basket = basket
+            )
+            service_create.save()
+
+
+
 
 
         
