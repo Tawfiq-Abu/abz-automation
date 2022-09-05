@@ -102,18 +102,50 @@ def basket_update(request):
         print(product_model_id)
         print(product_qty)
         # get the length of the items in the basket
-        basketqty = session_basket.__len__()
+        basket_quantity = session_basket.__len__()
         # basket_total = basket.get_total_price()
-        response = JsonResponse({'qty':basketqty})#'total':basket_total
+        response = JsonResponse({'basket_quantity':basket_quantity})#'total':basket_total
         return response
 
 
 def basket_delete(request):
     session_basket = SessionBasket(request)
     if request.method == 'POST':
-        product_model_id = int(request.POST.get('product_model_id'))
-        session_basket.delete(product_model_id=product_model_id)
-        basketqty =session_basket.__len__()
-        # basket_total = basket.get_total_price()
-        response = JsonResponse({'qty':basketqty})#'total':basket_total})
-        return response
+        # check the type of order and add to the appropriate basket section
+        order_type = request.POST.get('order_type')
+
+        if order_type == "product_order":
+            product_model_id = int(request.POST.get('product_model_id'))
+
+            # check if product_model is in basket
+            if not str(product_model_id) in session_basket.basket['product_orders']:
+                print("error here")
+                return JsonResponse({"error": "no such product order"}, status=400)
+
+            session_basket.delete_product_order(product_model_id=product_model_id)
+            basket_quantity = session_basket.__len__()
+            basket_total = session_basket.get_total_price()
+            
+            response = JsonResponse({
+                'basket_quantity':basket_quantity, 
+                'total':basket_total
+                })
+            return response
+        
+        elif order_type == "service_request":
+            service_id = int(request.POST.get('service_id'))
+
+            # check if product_model is in basket
+            if not str(service_id) in session_basket.basket['service_requests']:
+                print("error here")
+                return JsonResponse({"error": "no such service request"}, status=400)
+
+            session_basket.delete_service_request(service_id=service_id)
+            basket_quantity = session_basket.__len__()
+            basket_total = session_basket.get_total_price()
+            
+            response = JsonResponse({
+                'basket_quantity':basket_quantity, 
+                'total':basket_total
+                })
+            return response

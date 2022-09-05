@@ -61,49 +61,122 @@
   </div>
 
   {% comment %} ======= Cart Modal ======= {% endcomment %}
-<div class="modal fade" id="cart-modal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Your Cart</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        {% for key, value in request.session.skey.product_orders.items %}
-          {{value.name}} - {{ value.price }} <br><br>
-          <label for="select">Qty</label>
-                <select id="select{{key}}">
-                  <option selected>
-                    {{value.quantity}}
-                  </option>
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
-                  <option value="">4</option>
-                </select>
-                <button type="button" id="update-button" data-index={{ key }} 
-                  class="btn btn-outline-secondary btn-sm update-button">
-                  Update
-                </button>
-                <button type="button" id="delete-button" data-index="{{key}}" 
-                  class="btn btn-outline-secondary btn-sm delete-button">
-                  Delete
-                </button><br><br>
-        {%endfor%}
+  <div class="modal fade" id="cart-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Your Cart</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h5>Product Orders</h5>
+          {% for key, value in request.session.skey.product_orders.items %}
+          <div class="cart-item cart-item-product-order" data-product-model-id="{{ key }}">
+            
+            {{value.name}} - {{ value.price }} <br><br>
+            <label for="select">Qty</label>
+            <select id="select{{key}}">
+              <option selected>{{value.quantity}}</option>
+              <option value="">1</option>
+              <option value="">2</option>
+              <option value="">3</option>
+              <option value="">4</option>
+            </select>
 
-        {% for key, value in request.session.skey.service_requests.items %}
-          {{value.name}} - {{ value.price }} <br><br>
-          <label for="select">Qty</label>
-                
-        {%endfor%}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Clear</button>
-        <button type="button" class="btn btn-primary">Confirm</button>
+            <button type="button" id="update-button" data-index="{{ key }}" 
+              class="btn btn-outline-secondary btn-sm update-button">
+              Update
+            </button>
+            
+            <button type="button" id="delete-product-order" data-index="{{key}}" 
+              class="btn btn-outline-secondary btn-sm delete-button">
+              Delete
+            </button><br><br>
+          </div>
+          {%empty%}
+          No orders yet
+          {%endfor%}
+
+          <h5 class="mt-2">Service Requests</h5>
+          {% for key, value in request.session.skey.service_requests.items %}
+          <div class="cart-item cart-item-service-request" data-service-id="{{ key }}">
+            {{value.name}} - {{ value.price }} <br><br>
+
+            <button type="button" id="delete-service-request" data-index="{{key}}" 
+              class="btn btn-outline-secondary btn-sm delete-button">
+              Delete
+            </button><br><br>
+          </div>
+          {%empty%}
+          No requests yet
+          {%endfor%}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Clear</button>
+          <button type="button" class="btn btn-primary">Confirm</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+
+  <div class="modal fade" id="cart-contact-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Your Cart</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h5>Product Orders</h5>
+          {% for key, value in request.session.skey.product_orders.items %}
+          <div class="cart-item cart-item-product-order" data-product-model-id="{{ key }}">
+            
+            {{value.name}} - {{ value.price }} <br><br>
+            <label for="select">Qty</label>
+            <select id="select{{key}}">
+              <option selected>{{value.quantity}}</option>
+              <option value="">1</option>
+              <option value="">2</option>
+              <option value="">3</option>
+              <option value="">4</option>
+            </select>
+
+            <button type="button" id="update-button" data-index="{{ key }}" 
+              class="btn btn-outline-secondary btn-sm update-button">
+              Update
+            </button>
+            
+            <button type="button" id="delete-product-order" data-index="{{key}}" 
+              class="btn btn-outline-secondary btn-sm delete-button">
+              Delete
+            </button><br><br>
+          </div>
+          {%empty%}
+          No orders yet
+          {%endfor%}
+
+          <h5 class="mt-2">Service Requests</h5>
+          {% for key, value in request.session.skey.service_requests.items %}
+          <div class="cart-item cart-item-service-request" data-service-id="{{ key }}">
+            {{value.name}} - {{ value.price }} <br><br>
+
+            <button type="button" id="delete-service-request" data-index="{{key}}" 
+              class="btn btn-outline-secondary btn-sm delete-button">
+              Delete
+            </button><br><br>
+          </div>
+          {%empty%}
+          No requests yet
+          {%endfor%}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Clear</button>
+          <button type="button" class="btn btn-primary">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
 
   {% comment %} ======= Header ======= {% endcomment %}
   <header id="header" class="fixed-top">
@@ -804,7 +877,7 @@
                 action: 'post'
               },
               success: function(json){
-                document.getElementById('basket-quantity').innerHTML = json.qty
+                document.getElementById('basket-quantity').innerHTML = json.basket_quantity
                 {% comment %} document.getElementById('subtotal').innerHTML = json.total {% endcomment %}
                 console.log(json)
                 console.log(json.basket_quantity)
@@ -817,21 +890,45 @@
       })
 
 
-      $(document).on('click','#delete-button', function(e){
+      $(document).on('click','#delete-product-order', function(e){
         e.preventDefault();
-        var prodid = $(this).data('index')
+        var product_model_id = $(this).data('index')
         $.ajax({
             type: 'POST',
             url : '{% url "website:cart-delete" %}',
             data:{
-                productid: $(this).data('index'),
+							  order_type: "product_order",
+                product_model_id: product_model_id,
                 csrfmiddlewaretoken: '{{csrf_token}}',
                 action: 'post'
             },
             success: function(json){
-              $('.product-item[data-index="' + prodid + '"]').remove();
-              document.getElementById('subtotal').innerHTML = json.total
-              document.getElementById('basket-qty').innerHTML = json.qty
+              $(`.cart-item[data-product-model-id="${product_model_id}"]`).remove();
+              document.getElementById('basket-quantity').innerHTML = json.basket_quantity
+              {% comment %} document.getElementById('subtotal').innerHTML = json.total {% endcomment %}
+            },
+            error:function(xhr,errmsg,err){
+            
+            }
+        });
+    })
+
+     $(document).on('click','#delete-service-request', function(e){
+        e.preventDefault();
+        var service_id = $(this).data('index')
+        $.ajax({
+            type: 'POST',
+            url : '{% url "website:cart-delete" %}',
+            data:{
+							  order_type: "service_request",
+                service_id: service_id,
+                csrfmiddlewaretoken: '{{csrf_token}}',
+                action: 'post'
+            },
+            success: function(json){
+              $(`.cart-item[data-service-id="${service_id}"]`).remove();
+              document.getElementById('basket-quantity').innerHTML = json.basket_quantity
+              {% comment %} document.getElementById('subtotal').innerHTML = json.total {% endcomment %}
             },
             error:function(xhr,errmsg,err){
 

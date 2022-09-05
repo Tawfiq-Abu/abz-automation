@@ -89,18 +89,18 @@ class Basket():
         service_requests_total = sum(Decimal(service_request['price']) for service_request in self.basket['service_requests'].values())
         return product_orders_total + service_requests_total
 
-    def delete_product_order(self, product_order_id):
-        product_order_id = str(product_order_id)
+    def delete_product_order(self, product_model_id):
+        product_model_id = str(product_model_id)
 
-        if product_order_id in self.basket["product_orders"]:
-            del self.basket["product_orders"][product_order_id]
+        if product_model_id in self.basket["product_orders"]:
+            del self.basket["product_orders"][product_model_id]
         self.save()
     
-    def delete_service_request(self, service_request_id):
-        service_request_id = str(service_request_id)
+    def delete_service_request(self, service_id):
+        service_id = str(service_id)
 
-        if service_request_id in self.basket["service_requests"]:
-            del self.basket["service_requests"][service_request_id]
+        if service_id in self.basket["service_requests"]:
+            del self.basket["service_requests"][service_id]
         self.save()
     
 
@@ -113,13 +113,14 @@ class Basket():
             self.basket["product_orders"][product_model_id]['quantity'] = quantity
         self.save()
 
-    def update_service_request(self,service_request_id, quantity):
+    # ! NOT USED
+    def update_service_request(self,service_id, quantity):
         '''
         update service_request values in session data
         '''
-        service_request_id = str(service_request_id)
-        if service_request_id in self.basket["service_requests"]:
-            self.basket["service_requests"][service_request_id]['quantity'] = quantity
+        service_id = str(service_id)
+        if service_id in self.basket["service_requests"]:
+            self.basket["service_requests"][service_id]['quantity'] = quantity
         self.save()
 
 
