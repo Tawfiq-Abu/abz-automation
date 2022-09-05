@@ -75,12 +75,12 @@
         <div class="modal-body">
           <h5>Product Orders</h5>
 
-          {% for key, value in request.session.skey.product_orders.items %}
-          <div class="cart-item cart-item-product-order my-3" data-product-model-id="{{ key }}">
+          {% for id, product_model in request.session.skey.product_orders.items %}
+          <div class="cart-item cart-item-product-order my-3" data-product-model-id="{{ id }}">
             <div class="row">
-              <span class="product-name col-lg-10">{{value.name}}</span>
+              <span class="product-name col-lg-10">{{product_model.name}}</span>
               <div class="col-lg-2 d-flex justify-content-end">
-                <button id="delete-product-order" data-index="{{key}}" 
+                <button id="delete-product-order" data-index="{{id}}" 
                   class="btn btn-outline-danger btn-sm delete-button">
                   <i class="icofont-close"></i>
                 </button>
@@ -89,12 +89,12 @@
             
             <div class="row align-items-center">
               <div class="cart-item-quantity-container col-lg-6">
-                <input type="button" onclick="decrementValue()" value="-" />
-                <input class="text-center" value="{{value.quantity}}" type="text" maxlength="2" size="1">
-                <input type="button" onclick="decrementValue()" value="+" />
+                <input type="button" onclick="decrementQuantity(product_model_{{ id }}_quantity)" value="-" />
+                <input class="text-center" id="product_model_{{ id }}_quantity" value="{{product_model.quantity}}" type="text" maxlength="2" size="1">
+                <input type="button" onclick="incrementQuantity(product_model_{{ id }}_quantity)" value="+" />
               </div>
 
-              <div class="cart-item-amount col-lg-6 text-end fw-bold">GH&#162; {{ value.price }} </div>
+              <div class="cart-item-amount col-lg-6 text-end fw-bold">GH&#162; {{ product_model.price }} </div>
               
             </div>
 
@@ -109,12 +109,12 @@
           {%endfor%}
 
           <h5 class="mt-2">Service Requests</h5>
-          {% for key, value in request.session.skey.service_requests.items %}
-          <div class="cart-item cart-item-service-request" data-service-id="{{ key }}">
+          {% for id, service in request.session.skey.service_requests.items %}
+          <div class="cart-item cart-item-service-request" data-service-id="{{ id }}">
             <div class="row">
-              <span class="service-name col-lg-10">{{value.name}}</span>
+              <span class="service-name col-lg-10">{{service.name}}</span>
               <div class="col-lg-2 d-flex justify-content-end">
-                <button id="delete-service-request" data-index="{{key}}" 
+                <button id="delete-service-request" data-index="{{id}}" 
                   class="btn btn-outline-danger btn-sm delete-button">
                   <i class="icofont-close"></i>
                 </button>
@@ -940,7 +940,22 @@
     })
 
 
-      
+    function incrementQuantity(product_model_id_quantity){
+      console.log(product_model_id_quantity)
+      var value = parseInt(product_model_id_quantity.value, 10);
+      value = isNaN(value) ? 0 : value;
+      value++;
+      product_model_id_quantity.value = value;
+    }
+
+    function decrementQuantity(product_model_id_quantity){
+        var value = parseInt(product_model_id_quantity.value, 10);
+        value = isNaN(value) ? 0 : value;
+        if(value>1){
+          value--;
+          product_model_id_quantity.value = value;
+        }
+    }
 
 
 
