@@ -166,7 +166,7 @@ def confirm_basket(request):
         current_basket.save()
 
         for i,v in session_basket.basket['product_orders'].items():
-            product_model = ProductModel.objects.get(id = i)
+            product_model = ProductModel.objects.get(id = int(i))
             quantity = v['quantity']
             total_amount = v['price']
             basket = current_basket
