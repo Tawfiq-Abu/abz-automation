@@ -96,12 +96,12 @@
 
               <div class="cart-item-amount col-lg-6 text-end fw-bold">GH&#162; {{ product_model.price }} </div>
               
-            </div>
-
-            {% comment %} <button id="update-button" data-index="{{ key }}" 
+            <button id="update-button" data-index="{{ id }}" 
               class="btn btn-outline-secondary btn-sm update-button">
               Update
-            </button> {% endcomment %}
+            </button>
+            </div>
+
             
           </div>
           {%empty%}
@@ -147,8 +147,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <div class="">
-            <form class="d-flex flex-column gap-4 " action="" method="post" role="form">
+            <form id="cart-contact-details-form" class="d-flex flex-column gap-4" action="{% url 'website:cart-confirm' %}" method="post" role="form">
               {% csrf_token %}
               <div class="input-group">
                 <span class="input-group-text bg-primary text-white"><i class="icofont-user"></i></span>
@@ -160,13 +159,12 @@
               </div>
               <div class="input-group">
                 <span class="input-group-text bg-primary text-white"><i class="icofont-phone"></i></span>
-                <input type="text" class="form-control" name="customer_phone" id="phone-number" placeholder="phone-number" required/>
+                <input type="text" class="form-control" name="customer_phone_number" id="phone-number" placeholder="phone-number" required/>
               </div>
               <div class="input-group">
                 <textarea class="form-control" id="body" name="extra" rows="5" placeholder="Extra information about the order"></textarea>
               </div>
             </form>
-          </div>
         </div>
         <div class="modal-footer">
           <button 
@@ -174,7 +172,7 @@
             data-bs-target="#cart-modal" data-bs-toggle="modal" data-bs-dismiss="modal">
               Back
             </button>
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Confirm</button>
+          <button type="button" class="btn btn-primary" id="submit-cart-contact-details" data-bs-dismiss="modal">Confirm</button>
         </div>
       </div>
     </div>
@@ -869,13 +867,12 @@
         $(document).on('click','#update-button', function(e){
           e.preventDefault();
           var prodid = $(this).data('index')
-          console.log(prodid)
           $.ajax({
               type: 'POST',
               url : '{% url "website:cart-update" %}',
               data:{
                 product_model_id: prodid,
-                productqty: $('#select' + prodid +' option:selected').text().trim(),
+                productqty: document.getElementById(`product_model_${prodid}_quantity`).value,
                 csrfmiddlewaretoken: '{{csrf_token}}',
                 action: 'post'
               },
@@ -957,8 +954,9 @@
         }
     }
 
-
-
+    $('#submit-cart-contact-details').on('click', e => {
+      $('#cart-contact-details-form').submit()
+    })
 
 
   </script>

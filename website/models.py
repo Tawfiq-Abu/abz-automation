@@ -84,6 +84,7 @@ class Basket(models.Model):
     # https://django-location-field.readthedocs.io/en/latest/tutorials.html#using-django-location-field-in-the-django-admin
     #! location = PlainLocationField(based_fields=['city'], zoom=7)
     customer_phone_number = models.CharField(max_length=SHORT_STR_LEN)
+    date_ordered = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.customer_name
@@ -106,7 +107,7 @@ class ProductOrder(models.Model):
     basket = models.ForeignKey(Basket,on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
-        return self.product.name
+        return self.product_model.name
 
     def save(self, *args, **kwargs):
         self.total_amount = self.product_model.price * self.quantity

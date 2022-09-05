@@ -157,7 +157,7 @@ def confirm_basket(request):
         # creating the basket item
         customer_name = request.POST.get('customer_name')
         customer_email = request.POST.get('customer_email')
-        customer_phone_number = request.POST.get('customer_contact')
+        customer_phone_number = request.POST.get('customer_phone_number')
         current_basket = Basket.objects.create(
             customer_name = customer_name,
             customer_email = customer_email,
@@ -171,14 +171,18 @@ def confirm_basket(request):
             total_amount = v['price']
             basket = current_basket
 
-        ProductOrder.objects.create(
-            product_model = product_model,
-            quantity = quantity,
-            total_amount = total_amount,
-            basket = basket
-        )
-        ProductOrder.save()
+            product_order = ProductOrder.objects.create(
+                product_model = product_model,
+                quantity = quantity,
+                total_amount = total_amount,
+                basket = basket
+            )
+            product_order.save()
 
+        
+
+        response = JsonResponse({})
+        return response
 
 
 
