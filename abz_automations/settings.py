@@ -144,12 +144,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # EMAIL_USE_TLS = True
 
 
-LOCATION_FIELD = {
-    'provider.google.api': '//maps.google.com/maps/api/js?sensor=false',
-    'provider.google.api_key': config('GOOGLE_MAPS_API_KEY'),
-    'provider.google.api_libraries': '',
-    'provider.google.map.type': 'ROADMAP',
-}
+# LOCATION_FIELD = {
+#     'provider.google.api': '//maps.google.com/maps/api/js?sensor=false',
+#     'provider.google.api_key': config('GOOGLE_MAPS_API_KEY'),
+#     'provider.google.api_libraries': '',
+#     'provider.google.map.type': 'ROADMAP',
+# }
 
 # Emailing
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
