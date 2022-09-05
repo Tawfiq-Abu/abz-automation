@@ -61,7 +61,7 @@
   </div>
 
   {% comment %} ======= Cart Modal ======= {% endcomment %}
-  <div class="modal fade" id="cart-modal">
+  <div class="modal fade" id="cart-modal" aria-hidden="true" aria-labelledby="cart-modal" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -112,66 +112,54 @@
           {%endfor%}
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Clear</button>
-          <button type="button" class="btn btn-primary">Confirm</button>
+          {% comment %} <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Clear</button> {% endcomment %}
+          <button 
+            type="button" class="btn btn-primary" 
+            data-bs-target="#cart-contact-modal" data-bs-toggle="modal" data-bs-dismiss="modal">
+            Next
+          </button>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="modal fade" id="cart-contact-modal">
+  {% comment %} ======= Cart Contact Details Modal ======= {% endcomment %}
+  <div class="modal fade" id="cart-contact-modal" aria-hidden="true" aria-labelledby="cart-contact-modal" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Your Cart</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Add your details</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <h5>Product Orders</h5>
-          {% for key, value in request.session.skey.product_orders.items %}
-          <div class="cart-item cart-item-product-order" data-product-model-id="{{ key }}">
-            
-            {{value.name}} - {{ value.price }} <br><br>
-            <label for="select">Qty</label>
-            <select id="select{{key}}">
-              <option selected>{{value.quantity}}</option>
-              <option value="">1</option>
-              <option value="">2</option>
-              <option value="">3</option>
-              <option value="">4</option>
-            </select>
-
-            <button type="button" id="update-button" data-index="{{ key }}" 
-              class="btn btn-outline-secondary btn-sm update-button">
-              Update
-            </button>
-            
-            <button type="button" id="delete-product-order" data-index="{{key}}" 
-              class="btn btn-outline-secondary btn-sm delete-button">
-              Delete
-            </button><br><br>
+          <div class="">
+            <form class="d-flex flex-column gap-4 " action="" method="post" role="form">
+              {% csrf_token %}
+              <div class="input-group">
+                <span class="input-group-text bg-primary text-white"><i class="icofont-user"></i></span>
+                <input type="text" name="customer_name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required/>
+              </div>
+              <div class="input-group">
+                <span class="input-group-text bg-primary text-white"><i class="icofont-email"></i></span>
+                <input type="email" class="form-control" name="customer_email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" required/>
+              </div>
+              <div class="input-group">
+                <span class="input-group-text bg-primary text-white"><i class="icofont-phone"></i></span>
+                <input type="text" class="form-control" name="customer_phone" id="phone-number" placeholder="phone-number" required/>
+              </div>
+              <div class="input-group">
+                <textarea class="form-control" id="body" name="extra" rows="5" placeholder="Extra information about the order"></textarea>
+              </div>
+            </form>
           </div>
-          {%empty%}
-          No orders yet
-          {%endfor%}
-
-          <h5 class="mt-2">Service Requests</h5>
-          {% for key, value in request.session.skey.service_requests.items %}
-          <div class="cart-item cart-item-service-request" data-service-id="{{ key }}">
-            {{value.name}} - {{ value.price }} <br><br>
-
-            <button type="button" id="delete-service-request" data-index="{{key}}" 
-              class="btn btn-outline-secondary btn-sm delete-button">
-              Delete
-            </button><br><br>
-          </div>
-          {%empty%}
-          No requests yet
-          {%endfor%}
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Clear</button>
-          <button type="button" class="btn btn-primary">Confirm</button>
+          <button 
+            type="button" class="btn btn-secondary"
+            data-bs-target="#cart-modal" data-bs-toggle="modal" data-bs-dismiss="modal">
+              Back
+            </button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Confirm</button>
         </div>
       </div>
     </div>
