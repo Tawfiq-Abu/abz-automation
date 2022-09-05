@@ -65,33 +65,44 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Your Cart</h5>
+          <h5 class="modal-title d-flex align-items-center gap-1" id="exampleModalLabel">
+            Your Cart 
+            {% comment %} <span class="badge rounded-pill bg-info">{{request.session.skey|basket_length}}</span> {% endcomment %}
+          </h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+
         <div class="modal-body">
           <h5>Product Orders</h5>
-          {% for key, value in request.session.skey.product_orders.items %}
-          <div class="cart-item cart-item-product-order" data-product-model-id="{{ key }}">
-            
-            {{value.name}} - {{ value.price }} <br><br>
-            <label for="select">Qty</label>
-            <select id="select{{key}}">
-              <option selected>{{value.quantity}}</option>
-              <option value="">1</option>
-              <option value="">2</option>
-              <option value="">3</option>
-              <option value="">4</option>
-            </select>
 
-            <button type="button" id="update-button" data-index="{{ key }}" 
+          {% for key, value in request.session.skey.product_orders.items %}
+          <div class="cart-item cart-item-product-order my-3" data-product-model-id="{{ key }}">
+            <div class="row">
+              <span class="product-name col-lg-10">{{value.name}}</span>
+              <div class="col-lg-2 d-flex justify-content-end">
+                <button id="delete-product-order" data-index="{{key}}" 
+                  class="btn btn-outline-danger btn-sm delete-button">
+                  <i class="icofont-close"></i>
+                </button>
+              </div>
+            </div>
+            
+            <div class="row align-items-center">
+              <div class="cart-item-quantity-container col-lg-6">
+                <input type="button" onclick="decrementValue()" value="-" />
+                <input class="text-center" value="{{value.quantity}}" type="text" maxlength="2" size="1">
+                <input type="button" onclick="decrementValue()" value="+" />
+              </div>
+
+              <div class="cart-item-amount col-lg-6 text-end fw-bold">GH&#162; {{ value.price }} </div>
+              
+            </div>
+
+            {% comment %} <button id="update-button" data-index="{{ key }}" 
               class="btn btn-outline-secondary btn-sm update-button">
               Update
-            </button>
+            </button> {% endcomment %}
             
-            <button type="button" id="delete-product-order" data-index="{{key}}" 
-              class="btn btn-outline-secondary btn-sm delete-button">
-              Delete
-            </button><br><br>
           </div>
           {%empty%}
           No orders yet
@@ -100,17 +111,21 @@
           <h5 class="mt-2">Service Requests</h5>
           {% for key, value in request.session.skey.service_requests.items %}
           <div class="cart-item cart-item-service-request" data-service-id="{{ key }}">
-            {{value.name}} - {{ value.price }} <br><br>
-
-            <button type="button" id="delete-service-request" data-index="{{key}}" 
-              class="btn btn-outline-secondary btn-sm delete-button">
-              Delete
-            </button><br><br>
+            <div class="row">
+              <span class="service-name col-lg-10">{{value.name}}</span>
+              <div class="col-lg-2 d-flex justify-content-end">
+                <button id="delete-service-request" data-index="{{key}}" 
+                  class="btn btn-outline-danger btn-sm delete-button">
+                  <i class="icofont-close"></i>
+                </button>
+              </div>
+            </div>
           </div>
           {%empty%}
           No requests yet
           {%endfor%}
         </div>
+
         <div class="modal-footer">
           {% comment %} <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Clear</button> {% endcomment %}
           <button 
