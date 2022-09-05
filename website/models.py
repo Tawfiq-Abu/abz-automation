@@ -69,6 +69,7 @@ class ProductModelFeature(models.Model):
 class Service(models.Model):
     name = models.CharField(max_length=SHORT_STR_LEN)
     description = models.CharField(max_length=LONG_STR_LEN,null=True)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
     icon = models.CharField(max_length=SHORT_STR_LEN, choices=ICON_CHOICES, default="icofont-water-drop")
 
 
@@ -81,33 +82,35 @@ class Basket(models.Model):
     customer_name = models.CharField(max_length=SHORT_STR_LEN)
     customer_email = models.EmailField()
     # https://django-location-field.readthedocs.io/en/latest/tutorials.html#using-django-location-field-in-the-django-admin
-    location = PlainLocationField(based_fields=['city'], zoom=7)
+    #! location = PlainLocationField(based_fields=['city'], zoom=7)
     customer_phone_number = models.CharField(max_length=SHORT_STR_LEN)
 
     def __str__(self):
         return self.customer_name
 
 class ServiceRequest(models.Model):
-    total_amount = models.DecimalField(max_digits=6, decimal_places=2)
+    # total_amount = models.DecimalField(max_digits=6, decimal_places=2)
     service = models.ForeignKey(Service,on_delete=models.CASCADE)
-    basket = models.ForeignKey(Basket,on_delete=models.CASCADE)
+    basket = models.ForeignKey(Basket,on_delete=models.CASCADE, null=True, blank=True)
 
 
     def __str__(self):
         return self.service.name
 
 class ProductOrder(models.Model):
-    product = models.ForeignKey(Product,on_delete=models.CASCADE)
+    # product = models.ForeignKey(Product,on_delete=models.CASCADE)
+    # unit_price = models.DecimalField(max_digits=6, decimal_places=2)
     product_model = models.ForeignKey(ProductModel,on_delete=models.CASCADE)
-    quantity = models.IntegerField()
-    unit_price = models.DecimalField(max_digits=6, decimal_places=2)
+    quantity = models.IntegerField(default=1)
     total_amount = models.DecimalField(max_digits=6, decimal_places=2)
-    basket = models.ForeignKey(Basket,on_delete=models.CASCADE)
+    basket = models.ForeignKey(Basket,on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.product.name
 
-
+    def save(self, *args, **kwargs):
+        self.total_amount = self.product_model.price * self.quantity
+        return super(ProductOrder, self).save(*args, **kwargs)
 
 
 
