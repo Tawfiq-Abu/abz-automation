@@ -311,7 +311,8 @@
           <div class="row col-lg-4 align-self-start">
             <div class="col-lg-10 col-md-8 d-flex align-items-stretch mb-4" data-aos="zoom-in" data-aos-delay="100">
                 <div class="icon-box d-flex flex-column justify-content-around gap-3">
-                    <div class="icon"><i class="icofont-automation"></i></div>
+                    <div class="product-pic"><img src="{{ product.image.url }}" alt="Upload an image"></div>
+                    {% comment %} <div class="icon"><i class="icofont-automation"></i></div> {% endcomment %}
                     <h4><a>{{ product.name }}</a></h4>
                     <p>{{ product.description }}</p>
                 </div>
@@ -334,7 +335,7 @@
             <div class="row col-lg-8 flex-grow-1 align-items-stretch">
             {% for product_model in product.product_models.all|dictsort:"price" %}
               <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-3" data-aos="zoom-in" data-aos-delay="100">
-                <div class="product-model icon-box pb-3 d-flex flex-column justify-content-between gap-3">
+                <div class="product-model pb-3 d-flex flex-column justify-content-between gap-3">
                     <div class="top">
                       {% comment %} <div class="icon"><i class="icofont-automation"></i></div> {% endcomment %}
                       <h4 class="product-model-name fs-3"><a>{{ product_model.name }}</a></h4>
