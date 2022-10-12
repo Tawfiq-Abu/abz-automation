@@ -8,7 +8,7 @@ from .forms import BlogForm
 from django.core.exceptions import PermissionDenied
 # Create your views here.
 
-@method_decorator([login_required()], name="dispatch")
+# @method_decorator([login_required()], name="dispatch")
 class BlogView(ListView):
     template_name = "back/author/blog/index.html"
     model = Blog
@@ -23,18 +23,18 @@ class BlogView(ListView):
         }
         return render(request, self.template_name, context=context)
     
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST, request.FILES)
-        if form.is_valid():
-            object = form.save(commit=False)
-            object.author = self.request.user
-            object.save()
-        else:
-            print(form.errors)
-        return redirect('author:blogs')
+    # def post(self, request, *args, **kwargs):
+    #     form = self.form_class(request.POST, request.FILES)
+    #     if form.is_valid():
+    #         object = form.save(commit=False)
+    #         object.author = self.request.user
+    #         object.save()
+    #     else:
+    #         print(form.errors)
+    #     return redirect('author:blogs')
 
 
-@method_decorator([login_required()], name="dispatch")
+# @method_decorator([login_required()], name="dispatch")
 class BlogDetailView(DetailView):
     template_name = "back/author/blog/show.html"
     model = Blog
@@ -44,8 +44,8 @@ class BlogDetailView(DetailView):
         # the detail view has access to the current instance so we just call the increase_views func
         object = self.get_object()
         
-        if not (object.author == request.user or request.user.is_admin):
-            raise PermissionDenied()
+        # if not (object.author == request.user or request.user.is_admin):
+        #     raise PermissionDenied()
         
         object.increase_views()
         
@@ -57,11 +57,11 @@ class BlogDetailView(DetailView):
         }
         return render(request, self.template_name, context=context)
 
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST, instance=self.get_object())
-        if form.is_valid():
-            form.save()
+    # def post(self, request, *args, **kwargs):
+    #     form = self.form_class(request.POST, instance=self.get_object())
+    #     if form.is_valid():
+    #         form.save()
 
-        #   to be changed after writing urls
-        return redirect("author:blog", kwargs={'slug': self.get_object().slug})
+    #     #   to be changed after writing urls
+    #     return redirect("author:blog", kwargs={'slug': self.get_object().slug})
     
