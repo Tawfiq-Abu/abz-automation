@@ -195,6 +195,17 @@ def confirm_basket(request):
                 basket = basket
             )
             service_create.save()
+        message = (
+        "Hello Boss\n" +
+        f"You just received an order from {customer_name}\n" +
+        "Login to your dashboard to view more details\n\n" +
+        "Have a nice day"
+    )
+
+        email_body = message
+        data = {'email_body': email_body, 'to_email': settings.EMAIL_HOST_USER,
+                'email_subject': 'Order Placement'}
+        MailUtil.send_email(data)
 
         session_basket.clear(request)
 

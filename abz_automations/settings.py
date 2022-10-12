@@ -29,7 +29,17 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "abz-automations.herokuapp.com"
+]
+
+
+if DEBUG:
+    ALLOWED_HOSTS += [
+        "localhost",
+        '127.0.0.1',
+        '0.0.0.0',
+        ]
 
 
 # Application definition
@@ -43,11 +53,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'website',
     'location_field.apps.DefaultConfig',
+    'storages',
+    'blog',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -76,17 +91,26 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'abz_automations.wsgi.application'
 
+PLATFORM = config('PLATFORM')
+
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if PLATFORM == "local":
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
-
+else:
+    import dj_database_url
+    DATABASES = {
+        'default': dj_database_url.config(conn_max_age=600, ssl_require=True),
+    }
+# hmmmm
+# hgkj
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -144,12 +168,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # EMAIL_USE_TLS = True
 
 
-LOCATION_FIELD = {
-    'provider.google.api': '//maps.google.com/maps/api/js?sensor=false',
-    'provider.google.api_key': config('GOOGLE_MAPS_API_KEY'),
-    'provider.google.api_libraries': '',
-    'provider.google.map.type': 'ROADMAP',
-}
+# LOCATION_FIELD = {
+#     'provider.google.api': '//maps.google.com/maps/api/js?sensor=false',
+#     'provider.google.api_key': config('GOOGLE_MAPS_API_KEY'),
+#     'provider.google.api_libraries': '',
+#     'provider.google.map.type': 'ROADMAP',
+# }
 
 # Emailing
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -159,3 +183,72 @@ LOCATION_FIELD = {
 # EMAIL_HOST_PASSWORD = ('EMAIL_HOST_PASSWORD')
 # EMAIL_USE_TLS = True
 
+
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID', default="")
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY', default="")
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME', default="")
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'} 
+AWS_DEFAULT_ACL = 'public-read'
+
+
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+
+def static_lazy(path):
+    from django.templatetags.static import static
+    from django.utils.functional import lazy
+    return lazy(lambda: static(path), str)()
+
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'skin': 'moono',
+        'toolbar_Basic': [
+            ['-', 'Bold', 'Italic']
+        ],
+        "format_tags": "h1;h2;h3;p;pre",
+        'toolbar_YourCustomToolbarConfig': [
+            {'name': 'document', 'items': ['-', 'Save', 'Preview', 'Print', '-', 'Templates']},
+            {'name': 'clipboard', 'items': ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
+            {'name': 'editing', 'items': ['Find', 'Replace', '-', 'SelectAll']},
+            {'name': 'forms',
+             'items': ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField']},
+            '/',
+            {'name': 'basicstyles',
+             'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']},
+            {'name': 'paragraph',
+             'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language']},
+            {'name': 'links', 'items': ['Link', 'Unlink', 'Anchor']},
+            {'name': 'insert',
+             'items': ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar',  'PageBreak', 'Iframe', 'CodeSnippet']},
+            '/',
+            {'name': 'styles', 'items': ['Styles', 'Format', 'Font', 'FontSize']},
+            {'name': 'colors', 'items': ['TextColor', 'BGColor']},
+            {'name': 'tools', 'items': ['Maximize', 'ShowBlocks', 'Preview']},
+        ],
+        'toolbar': 'YourCustomToolbarConfig',
+        'height': '100%',
+        'width': '100%',
+        "font-size": "14px",
+        'tabSpaces': 4,
+        'extraPlugins': ','.join([
+            'uploadimage',
+            'div',
+            'autolink',
+            'autoembed',
+            'embedsemantic',
+            'autogrow',
+            'devtools',
+            'widget',
+            'lineutils',
+            'clipboard',
+            'dialog',
+            'dialogui',
+            'elementspath',
+            'codesnippet',
+        ]),
+        "contentCss": [static_lazy("ckeditorstyles.css")]
+    }
+}

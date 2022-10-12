@@ -17,6 +17,10 @@ from utils.constants import TINY_STR_LEN, SHORT_STR_LEN, LONG_STR_LEN, ICON_CHOI
 def icon_image_directory(instance, filename):
     return '/'.join(['images', 'team-member', str(instance.first_name), filename])
 
+def product_image_directory(instance, filename):
+    return '/'.join(['images', 'team-member', str(instance.name), filename])
+
+
 class TeamMember(models.Model):
     first_name = models.CharField(max_length=SHORT_STR_LEN)
     other_names = models.CharField(max_length=SHORT_STR_LEN, null=True, blank=True)
@@ -42,6 +46,7 @@ class Metric(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=SHORT_STR_LEN)
     description = models.TextField()
+    image = models.ImageField(upload_to=product_image_directory)
 
     def __str__(self):
         return self.name
@@ -50,7 +55,7 @@ class ProductModel(models.Model):
     product = models.ForeignKey(Product,on_delete=models.CASCADE, related_name="product_models")
     name = models.CharField(max_length=SHORT_STR_LEN)
     price = models.DecimalField(max_digits=6, decimal_places=2)
-    available = models.BooleanField(default=True)
+    available = models.BooleanField(default=True,)
 
     def __str__(self):
         return f"{self.product} - {self.name}"
@@ -66,7 +71,7 @@ class ProductModelFeature(models.Model):
 class Service(models.Model):
     name = models.CharField(max_length=SHORT_STR_LEN)
     description = models.CharField(max_length=LONG_STR_LEN,null=True)
-    price = models.DecimalField(max_digits=6, decimal_places=2)
+    # price = models.DecimalField(max_digits=6, decimal_places=2)
     icon = models.CharField(max_length=SHORT_STR_LEN, choices=ICON_CHOICES, default="icofont-water-drop")
 
 

@@ -50,7 +50,7 @@ class Basket():
                 service_request = ServiceRequest.objects.create(service=service)
                 self.basket["service_requests"][service_id] = {
                     'name': service_request.service.name,
-                    'price': str(service_request.service.price)
+                    # 'price': str(service_request.service.price)
                 }
         self.save()
        
