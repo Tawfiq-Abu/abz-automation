@@ -53,7 +53,9 @@ class BasketAdmin(admin.ModelAdmin):
         ProductOrderInline,
         ServiceRequestInline
     ]
-    readonly_fields = ('customer_name', 'customer_email', 'customer_phone_number', 'date_ordered')
+    readonly_fields = ('customer_name', 'customer_email', 'customer_phone_number', 'date_ordered', 'extra_info')
+    list_display = ('id', 'customer_name', 'customer_email', 'date_ordered')
+    ordering = ['-date_ordered']
 
 admin.site.register(Product,ProductAdmin)
 admin.site.register(Basket, BasketAdmin)
