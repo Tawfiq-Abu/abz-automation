@@ -5,7 +5,7 @@ from uuslug import uuslug
 
 
 def blogs_image_directory(instance, filename):
-    return '/'.join(['images', 'team-member', str(instance.first_name), filename])
+    return '/'.join(['images', 'team-member', str(instance.title), filename])
 
 
 # Create your models here.
