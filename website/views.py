@@ -1,3 +1,4 @@
+from pprint import pprint
 from django.shortcuts import render,redirect
 from django.http import JsonResponse
 from django.views.generic import TemplateView, ListView, View
@@ -80,7 +81,11 @@ def add_to_basket(request):
             service = Service.objects.get(pk=service_id)
             session_basket.add_service(service=service)
         
-        return JsonResponse({"basket_quantity": session_basket.__len__()})
+        pprint(session_basket.basket)
+        return JsonResponse({
+            "basket": session_basket.basket,
+            "basket_quantity": session_basket.__len__()
+            })
 
 
         
@@ -158,10 +163,13 @@ def confirm_basket(request):
         customer_name = request.POST.get('customer_name')
         customer_email = request.POST.get('customer_email')
         customer_phone_number = request.POST.get('customer_phone_number')
+        extra_info = request.POST.get('extra')
+        
         current_basket = Basket.objects.create(
             customer_name = customer_name,
             customer_email = customer_email,
-            customer_phone_number = customer_phone_number
+            customer_phone_number = customer_phone_number,
+            extra_info = extra_info
         )
         current_basket.save()
 
@@ -198,6 +206,8 @@ def confirm_basket(request):
         data = {'email_body': email_body, 'to_email': settings.EMAIL_HOST_USER,
                 'email_subject': 'Order Placement'}
         MailUtil.send_email(data)
+
+        session_basket.clear(request)
 
         response = JsonResponse({})
         return response

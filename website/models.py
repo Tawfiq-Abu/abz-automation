@@ -1,8 +1,5 @@
 
-import email
-from itertools import product
-from pyexpat import model
-from statistics import mode
+import uuid
 from django.db import models
 from utils.constants import TINY_STR_LEN,SHORT_STR_LEN,LONG_STR_LEN
 
@@ -84,15 +81,17 @@ class Service(models.Model):
 
 
 class Basket(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     customer_name = models.CharField(max_length=SHORT_STR_LEN)
     customer_email = models.EmailField()
     # https://django-location-field.readthedocs.io/en/latest/tutorials.html#using-django-location-field-in-the-django-admin
     #! location = PlainLocationField(based_fields=['city'], zoom=7)
     customer_phone_number = models.CharField(max_length=SHORT_STR_LEN)
     date_ordered = models.DateTimeField(auto_now_add=True)
+    extra_info = models.TextField(blank=True, null=True)
 
-    # def __str__(self):
-    #     return self.customer_name
+    def __str__(self):
+        return str(self.id)
 
 class ServiceRequest(models.Model):
     # total_amount = models.DecimalField(max_digits=6, decimal_places=2)

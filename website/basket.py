@@ -19,7 +19,10 @@ class Basket():
 
     def clear(self, request):
         self.session = request.session
-        self.basket = self.session['skey'] = {}
+        self.basket = self.session['skey'] = {
+            "product_orders": {},
+            "service_requests": {}
+        }
 
     def add_product_model(self, product_model):
         '''

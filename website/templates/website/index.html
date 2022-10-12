@@ -74,54 +74,57 @@
 
         <div class="modal-body">
           <h5>Product Orders</h5>
-
-          {% for id, product_model in request.session.skey.product_orders.items %}
-          <div class="cart-item cart-item-product-order my-3" data-product-model-id="{{ id }}">
-            <div class="row">
-              <span class="product-name col-lg-10">{{product_model.name}}</span>
-              <div class="col-lg-2 d-flex justify-content-end">
-                <button id="delete-product-order" data-index="{{id}}" 
-                  class="btn btn-outline-danger btn-sm delete-button">
-                  <i class="icofont-close"></i>
-                </button>
+          <div id="product-orders-container">
+            {% for id, product_model in request.session.skey.product_orders.items %}
+            <div class="cart-item cart-item-product-order my-3" data-product-model-id="{{ id }}">
+              <div class="row">
+                <span class="product-name col-lg-10">{{product_model.name}}</span>
+                <div class="col-lg-2 d-flex justify-content-end">
+                  <button id="delete-product-order" data-index="{{id}}" 
+                    class="btn btn-outline-danger btn-sm delete-button">
+                    <i class="icofont-close"></i>
+                  </button>
+                </div>
               </div>
-            </div>
-            
-            <div class="row">
-              <div class="cart-item-quantity-container col-lg-6">
-                <input type="button" onclick="decrementQuantity(product_model_{{ id }}_quantity)" value="-" />
-                <input class="text-center" id="product_model_{{ id }}_quantity" value="{{product_model.quantity}}" type="text" maxlength="2" size="1">
-                <input type="button" onclick="incrementQuantity(product_model_{{ id }}_quantity)" value="+" />
-              </div>
-
-              <div class="cart-item-amount col-lg-6 text-end fw-bold">GH&#162; {{ product_model.price }} </div>
               
+              <div class="row">
+                <div class="cart-item-quantity-container col-lg-6">
+                  <input type="button" onclick="decrementQuantity(product_model_{{ id }}_quantity)" value="-" />
+                  <input class="text-center" id="product_model_{{ id }}_quantity" value="{{product_model.quantity}}" type="text" maxlength="2" size="1">
+                  <input type="button" onclick="incrementQuantity(product_model_{{ id }}_quantity)" value="+" />
+                </div>
+  
+                <div class="cart-item-amount col-lg-6 text-end fw-bold">GH&#162; {{ product_model.price }} </div>
+                
+              </div>
+              <button id="update-button" data-index="{{ id }}" 
+                class="btn btn-outline-secondary btn-sm update-button mt-2">
+                Update
+              </button>
             </div>
-            <button id="update-button" data-index="{{ id }}" 
-              class="btn btn-outline-secondary btn-sm update-button mt-2">
-              Update
-            </button>
+            {%empty%}
+            No orders yet
+            {%endfor%}
           </div>
-          {%empty%}
-          No orders yet
-          {%endfor%}
 
           <h5 class="mt-2">Service Requests</h5>
-          {% for id, service in request.session.skey.service_requests.items %}
-          <div class="cart-item cart-item-service-request" data-service-id="{{ id }}">
-            <div class="row">
-              <span class="service-name col-lg-10">{{service.name}}</span>
-              <div class="col-lg-2 d-flex justify-content-end">
-                <button id="delete-service-request" data-index="{{id}}" 
-                  class="btn btn-outline-danger btn-sm delete-button">
-                  <i class="icofont-close"></i>
-                </button>
+          <div id="service-requests-container">
+            {% for id, service in request.session.skey.service_requests.items %}
+            <div class="cart-item cart-item-service-request" data-service-id="{{ id }}">
+              <div class="row">
+                <span class="service-name col-lg-10">{{service.name}}</span>
+                <div class="col-lg-2 d-flex justify-content-end">
+                  <button id="delete-service-request" data-index="{{id}}" 
+                    class="btn btn-outline-danger btn-sm delete-button">
+                    <i class="icofont-close"></i>
+                  </button>
+                </div>
               </div>
             </div>
+            {%empty%}
+            No requests yet
+            {%endfor%}
           </div>
-          {%empty%}
-          No requests yet
-          {%endfor%}
         </div>
 
         <div class="modal-footer">
@@ -823,7 +826,9 @@
                 product_model_id: $(this).data('product-model-id'),
             },
             success: function(json){
-                document.getElementById('basket-quantity').innerHTML = json.basket_quantity;
+                // rerender cart
+                // add product to cart in HTML
+                rerenderCart(json.basket, json.basket_quantity); 
             },
             error:function(json){
                 alert(json.responseJSON.error)
@@ -842,7 +847,7 @@
                 service_id: $(this).data('service-id'),
             },
             success: function(json){
-                document.getElementById('basket-quantity').innerHTML = json.basket_quantity;
+                rerenderCart(json.basket, json.basket_quantity); 
             },
             error:function(json){
                 alert(json.responseJSON.error)
@@ -850,18 +855,6 @@
         });
     })
     
-    {% comment %} <div class="mapouter"><div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=Pankrono%20Estate,%20kumasi%20Near%20true%20vine%20hospital&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://fmovies2.org"></a><br><style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}</style><a href="https://google-map-generator.com">html embed google maps</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style></div></div> {% endcomment %}
-
-        function isNotEmpty(caller) {
-            if (caller.val() == "") {
-                caller.css('border', '1px solid red');
-                return false;
-            } else
-                caller.css('border', '');
-
-            return true;
-        }
-
 
         $(document).on('click','#update-button', function(e){
           e.preventDefault();
@@ -957,6 +950,84 @@
       $('#cart-contact-details-form').submit()
     })
 
+
+    function rerenderCart(basket, basketQuantity) {
+      // parent elements
+      const cartProductOrdersContainerElem = document.querySelector("#product-orders-container");
+      const cartServiceRequestsContainerElem = document.querySelector("#service-requests-container");
+      
+      // empty parent elements
+      cartProductOrdersContainerElem.innerHTML = "";
+      cartServiceRequestsContainerElem.innerHTML = "";
+
+      // loop through the basket, 
+      // create the child elements for each product order and service request
+      // add them to the parent element
+      
+      const {product_orders: productOrders, service_requests: serviceRequests} = basket;
+      
+      // populate product orders
+      Object.entries(productOrders).forEach(productOrder => {
+        const [id, product_model] = productOrder;
+        
+        let newProductOrderElem = document.createElement('div');
+        newProductOrderElem.classList.add('cart-item', 'cart-item-product-order', 'my-3');
+        newProductOrderElem.setAttribute('data-product-model-id', id);
+        newProductOrderElem.innerHTML = `
+          <div class="row">
+            <span class="product-name col-lg-10">${product_model.name}</span>
+            <div class="col-lg-2 d-flex justify-content-end">
+              <button id="delete-product-order" data-index="${id}" 
+                class="btn btn-outline-danger btn-sm delete-button">
+                <i class="icofont-close"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="cart-item-quantity-container col-lg-6">
+              <input type="button" onclick="decrementQuantity(product_model_${ id }_quantity)" value="-" />
+              <input class="text-center" id="product_model_${ id }_quantity" value="${product_model.quantity}" type="text" maxlength="2" size="1">
+              <input type="button" onclick="incrementQuantity(product_model_${ id }_quantity)" value="+" />
+            </div>
+  
+            <div class="cart-item-amount col-lg-6 text-end fw-bold">GH&#162; ${ product_model.price } </div>
+            
+          </div>
+          <button id="update-button" data-index="${ id }" 
+            class="btn btn-outline-secondary btn-sm update-button mt-2">
+            Update
+          </button>
+        `;
+        
+        cartProductOrdersContainerElem.appendChild(newProductOrderElem)
+      })
+
+      // populate service requests
+      Object.entries(serviceRequests).forEach(serviceRequest => {
+        const [id, service] = serviceRequest;
+        
+        let newServiceRequestElem = document.createElement('div');
+        newServiceRequestElem.classList.add('cart-item', 'cart-item-service-request');
+        newServiceRequestElem.setAttribute('data-service-id', id);
+        newServiceRequestElem.innerHTML = `
+              <div class="row">
+                <span class="service-name col-lg-10">${service.name}</span>
+                <div class="col-lg-2 d-flex justify-content-end">
+                  <button id="delete-service-request" data-index="${id}" 
+                    class="btn btn-outline-danger btn-sm delete-button">
+                    <i class="icofont-close"></i>
+                  </button>
+                </div>
+              </div>
+        `;
+        
+        cartServiceRequestsContainerElem.appendChild(newServiceRequestElem);
+      })
+      
+      // increment cart count
+      document.getElementById('basket-quantity').innerHTML = basketQuantity;
+    }
 
   </script>
 
