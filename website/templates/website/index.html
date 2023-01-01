@@ -107,7 +107,7 @@
             {%endfor%}
           </div>
 
-          <h5 class="mt-2">Service Requests</h5>
+          <h5 class="mt-4">Service Requests</h5>
           <div id="service-requests-container">
             {% for id, service in request.session.skey.service_requests.items %}
             <div class="cart-item cart-item-service-request" data-service-id="{{ id }}">
@@ -313,7 +313,7 @@
           {% comment %} Product {% endcomment %}
           <div class="row col-lg-4 align-self-start">
             <div class="col-lg-10 col-md-8 d-flex align-items-stretch mb-4" data-aos="zoom-in" data-aos-delay="100">
-                <div class="icon-box d-flex flex-column justify-content-around gap-3">
+                <div class="product icon-box d-flex flex-column justify-content-around gap-3">
                     <div class="product-pic"><img src="{{ product.image.url }}" alt="Upload an image"></div>
                     {% comment %} <div class="icon"><i class="icofont-automation"></i></div> {% endcomment %}
                     <h4><a>{{ product.name }}</a></h4>
