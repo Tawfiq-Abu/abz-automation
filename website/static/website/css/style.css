@@ -933,12 +933,16 @@ section {
   transition: ease-in-out 0.3s;
 }
 
-.product-pic img{
+.services .product {
+  max-height: 300px;
+}
+
+.services .product .product-pic img{
   /* border-radius: 50%; */
   height: 100%;
   width: 100%;
-  object-fit: cover;
-  object-position: top;
+  object-fit: contain;
+  object-position: center;
 }
 
 .services .icon-box h4 {
